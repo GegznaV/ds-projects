@@ -1,0 +1,2678 @@
+---
+pagetitle: "DA-3-proj | VG"
+title:     "Red Wine Quality"
+subtitle:  "Data Analysis Project"
+author:    "Vilmantas Gėgžna"
+date: 2023-02-07
+date-modified: today
+date-format: iso
+fig-width: 6
+fig-height: 3.5
+fig-align: "center"
+results: hold
+format:
+  html:
+    embed-resources: true
+    results: hold
+    toc: true
+    toc_float: true
+    toc-location: left
+    number-sections: true
+    df-print: paged
+    link-external-newwindow: true
+    link-external-icon: true
+    code-tools: true
+    code-fold: show # possible options: false, true, show
+    code-summary: "Python code"
+    include-after-body: # To bold "Fig" and "Table" in captions.
+      text: |
+        <script>
+        document.addEventListener("DOMContentLoaded", () => {
+          document.querySelectorAll("figcaption").forEach(e => {
+          e.innerHTML = e.innerHTML.replace(/^((Fig.*?)&nbsp;\d+([.]\d+[.]))/, "<strong>$1</strong>")})
+        });
+        document.addEventListener("DOMContentLoaded", () => {
+          document.querySelectorAll("caption").forEach(e => {
+          e.innerHTML = e.innerHTML.replace(/^(Table.*?&nbsp;\d+([.]\d+[.]))/, "<strong>$1</strong>")})
+        });
+        </script>
+bibliography: assets/references.bib
+filters:
+  - black-formatter
+# VS Code:
+editor:
+    render-on-save: false
+# RStudio:
+editor_options:
+  chunk_output_type: inline
+  markdown:
+    extensions: -smart
+---
+
+
+```{css, echo=FALSE}
+#title-block-header.quarto-title-block.default .quarto-title-meta {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+
+div.sourceCode {
+  margin: 0;
+}
+
+/* R code indicator */
+pre.sourceCode .r {
+  border-left: 5px solid #7b97ea;
+  border-radius: 0
+}
+.r .fu {font-weight: bold;}
+
+/* Python code indicator */
+pre.sourceCode .python {
+  border-left: 5px solid #CFB53B;
+  border-radius: 0
+}
+
+/* Details sections */
+
+details[open].with-border {
+  padding: 1px 5px 1px 5px;
+  border-style: solid;
+  border-color: grey;
+  border-width: 3px;
+  border-radius: 5px;
+}
+```
+
+***Data analysis tools:*** Python, R, Looker Studio     
+***Helper tools:*** Quarto, RStudio, Git  
+***Skills:***
+
+- statistical programming,
+- data pre-processing,
+- descriptive statistics and data visualization, EDA,
+- inferential statistics: hypothesis testing and confidence intervals,
+- statistical modelling: linear and logistic regression,
+- dashboarding,
+- literate programming.
+
+
+# Abbreviations {.unnumbered}
+
+- AIC – Akaike information criterion.
+- CI – 95% confidence interval.
+- CV – cross-validation.
+- Dim – dimension (principal component, the same as PC).
+- EDA – exploratory data analysis.
+- n – either sample or group size.
+- p – p-value.
+- p_adj – p-value (adjusted).
+- PCA – principal component analysis.
+- PC – principal component.
+- r – correlation coefficient.
+- R² – r squared, coefficient of determination.
+- RNG – (pseudo)random number generator.
+- RMSE – root mean squared error.
+- SFS – sequential feature selection.
+- VIF – variation inflation factor.
+
+
+# Introduction
+
+Wine quality assessment and certification are important for **wine making and selling** processes. Certification helps to **prevent counterfeiting** and in this way **protects** people's **health** as well as **assures quality** for the wine market. **To identify the most influential factors** is crucial for effective quality evaluation while to classify wines into quality groups is useful **for setting prices** [@cortez2009].
+
+*Vinho verde* is wine from the Minho region, which is located in the northwest part of Portugal.
+In this project, data of **red *vinho verde*** wine specimens are investigated.
+The dataset was originally provided by [@cortez2009]. 
+This project **mainly focuses** on:
+
+a) **prediction quality** (to investigate how accurately **(1)** *wine quality* and **(2)** *alcohol content* in wine can be predicted) and
+b) **explanation** (to identify, which are the most important factors for the prediction tasks).
+
+
+## The Dataset
+
+Various aspects of the dataset are described in various sources. Pieces of description from article of [@cortez2009] as well as from websites [@kaggleRedWine; @uminhoWineQuality] were copied, merged and presented in this sub-section.
+
+Variables based on physicochemical tests:
+
+1.  **fixed acidity** ($g_{\textrm{ tartaric acid}}/l$): most acids involved with wine or fixed or nonvolatile (do not evaporate readily).
+2.  **volatile acidity** ($g_{\textrm{ acetic acid}}/l$): the amount of acetic acid in wine, which at too high levels can lead to an unpleasant, vinegar taste.
+3.  **citric acid** ($g/l$): found in small quantities, citric acid can add 'freshness' and flavor to wines.
+4.  **residual sugar** ($g/l$): the amount of sugar remaining after fermentation stops, it's rare to find wines with less than 1 gram/liter and wines with greater than 45 grams/liter are considered sweet.
+5.  **chlorides** ($g_{\textrm{ sodium chloride}}/l$): the amount of salt in the wine.
+6.  **free sulfur dioxide** ($mg/l$): the free form of SO₂ exists in equilibrium between molecular SO₂ (as a dissolved gas) and bisulfite ion; it prevents microbial growth and the oxidation of wine.
+7.  **total sulfur dioxide** ($mg/l$): amount of free and bound forms of SO₂; in low concentrations, SO₂ is mostly undetectable in wine, but at free SO₂ concentrations over 50 ppm, SO₂ becomes evident in the nose and taste of wine.
+8.  **density** ($g/cm^3$): the density of water is close to that of water depending on the percent alcohol and sugar content.
+9.  **pH**: describes how acidic or basic a wine is on a scale from 0 (very acidic) to 14 (very basic); most wines are between 3-4 on the pH scale.
+10. **sulphates**: a wine additive which can contribute to sulfur dioxide gas (SO₂) levels, which acts as an antimicrobial and antioxidant.
+11. **alcohol** (% vol.): the percent alcohol content of the wine.
+
+Variable based on sensory data:
+
+12. **quality** (score between 0 and 10).
+
+
+# Methods
+
+## R and Python in a Single Analysis
+
+**RStudio** is an IDE for R and Python. In Quarto (`.qmd`) and R Markdown (`.rmd`) documents, RStudio supports an interface that allows using R and Python in a single document (e.g., we can access Python objects in R code cells by using `py$<python_object_name>`{.r} accessor, and access R objects in Pthon code cells by using `r.<r_object_name>`{.py} accessor). So additional technical tasks for this project were to:
+
+- Try RStudio capabilities for Python programming (documentation, data analysis, plotting, etc.).
+- Try RStudio interface between R and Python: use these 2 tools in the same file.
+
+Main principles how it was lewveraged between R and Python in this project:
+
+- **Python** is used for all steps which are directly related to putting model into **production.**
+- **Some** exploratory analysis steps and **other tasks** that are easier to perform in R, are done **in R**.
+
+
+## Population and Sample
+
+The **population** of interest is red *vinho verde* wines.
+It is assumed that the data is a simple random sample or its equivalent that allows using methods of inferential statistics.
+
+
+## Training and Test Sets
+
+As the *prediction* step will be included in the analysis, the whole sample is divided into model training and test sets using **80:20 train/test hold-out** strategy with stratification by wine quality scores.
+
+**Training set** was used for:
+
+- exploratory analysis;
+- statistical inference;
+- model creation and selection.
+
+**Test set** was used *only* to evaluate the performance of the final models.
+
+
+## General: Inferential Statistics
+
+For statistical inference, significance level $\alpha=0.05$ and 95% confidence level are used.
+
+
+## Differences Between Groups 
+
+For statistical inference about several groups (categories), the following strategy is used:
+
+- *first*, 95% **confidence intervals** (CI) for each group are calculated,
+- *second*, an **omnibus** test is performed.
+
+<!-- ... -->
+- **In the analysis of counts ** *(sizes of wine quality groups),*  
+the following methods are used:
+   - *confidence intervals:* **Goodman's** simultaneous confidence intervals of proportions;
+   - *omnibus:* Pearson's **chi-square** (χ²) goodness-of-fit (GOF) test,
+       + *hypotheses:*   
+           $H_0:$ All proportions are equal:  $~ \pi_1 = \pi_2 = ... = \pi_i = ... = \pi_k$   
+           $H_1:$ At least two proportions differ: 
+           $\pi_i \ne \pi_j$ for at least single pair of i and j.
+
+
+   Here $\pi$ (pi) is a proportion (relative frequency, percentage) of values in certain group,  
+   $i$ and $j$ are group indices ($i$ = 1, 2, ..., $k$;  $j$ = 1, 2, ..., $k$; $i \ne j$),      
+   $k$ – total number of groups.
+
+
+## Correlation Between Variables
+
+For relationship between numeric variables, parametric **Pearson's correlation** analysis is used. 
+
+- *Hypotheses:*  
+        $H_0:$ $\rho = 0$ (variables do not correlate),  
+        $H_1:$ $\rho \ne 0$ (variables correlate).
+
+    Here $\rho$ (rho) is population Pearson's correlation coefficient.
+
+In statistical significance testing, as hypotheses are tested multiple times, to prevent inflated type 1 error rate, *Holm correction* is applied.
+
+
+## Classification Task
+
+To predict wine quality, quality scores were merged into 3 groups ("low", "medium", "high") and this variable was modeled by using  **multinomial logistic regression**.
+For feature selection, statistical inference based strategy is applied. The main measure to evaluate overall classification performance is **Cohen's kappa (κ)**.
+
+
+## Regression Task
+
+To predict alcohol content, **linear regression** is used.
+For feature selection sequential feature selection (SFS) with 5-fold cross validation was used.
+The main metric for model performance was **R²**.
+For the final evaluation, RMSE was included too.
+
+
+## Feature Engineering
+
+In some cases data were right-skewed. So this type of variables were investigated on the **original scale** (not transformed) **and** after the **logarithmic transformation**.
+
+
+
+# Preparation and Inspection
+
+## Setup
+
+Both R and Python will be used in this project.
+R code is marked with blue and Python code with yellow stripes.
+
+```{r, setup}
+#| code-summary: "Code: R setup"
+#| label: setup
+#| message: false
+#| results: false
+#| code-fold: true
+
+# R setup ================================================
+# R packages ---------------------------------------------
+library(tidyverse)
+library(reticulate)
+library(factoextra)
+library(DescTools)
+library(patchwork)
+
+# R options ----------------------------------------------
+options(scipen = 5)
+DescToolsOptions(stamp = NULL, digits = 3)
+
+# Default ggplot2 theme
+theme_set(theme_bw())
+
+# Other options
+knitr::opts_chunk$set(fig.height = 3.5, fig.width = 6, fig.align = "center")
+
+# RNG state
+set.seed(100)
+```
+
+```{python}
+#| code-summary: "Code: Python setup"
+#| label: python-setup
+#| message: false
+#| results: false
+#| code-fold: true
+
+# Python setup =========================================
+
+# Packages and modules ---------------------------------
+
+# Utilities 
+import warnings
+
+# Data wrangling, math
+import numpy as np
+import pandas as pd
+import janitor
+from numpy import log
+
+# Statistical analysis and modeling
+import patsy
+import scipy.stats as sps
+import statsmodels.api as sm
+import statsmodels.stats.api as sms
+import statsmodels.formula.api as smf
+import pingouin as pg
+import scikit_posthocs as sp
+from statsmodels.stats.outliers_influence import variance_inflation_factor
+from scipy.stats import ttest_1samp
+
+# Machine learning
+from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import mean_squared_error as mse, r2_score 
+from sklearn.metrics import cohen_kappa_score, classification_report
+from sklearn.metrics import  confusion_matrix, balanced_accuracy_score
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
+from mlxtend.feature_selection import SequentialFeatureSelector
+
+# Visualization
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+
+# Python Settings -----------------------------------------
+# Default plot options
+plt.rc("figure", titleweight="bold")
+plt.rc("axes", labelweight="bold", titleweight="bold")
+plt.rc("font", weight="normal", size=10)
+plt.rc("figure", figsize=(7, 3))
+
+# Pandas options
+pd.set_option("display.max_rows", 1000)
+pd.set_option("display.max_columns", 20)
+pd.set_option("display.max_colwidth", 40)  # Possible option: None
+pd.set_option("display.float_format", lambda x: f"{x:.3f}")
+pd.set_option("styler.format.thousands", ",")
+
+# RNG state
+np.random.seed(100)
+```
+
+
+```{python}
+#| code-summary: "Code: Ad-hoc Python functions"
+#| label: python-functions
+#| code-fold: true
+
+# Ad-hoc Python functions
+def format_p0(p):
+    """Format p values at 3 decimal places.
+
+    Args:
+        p (float): p value (number between 0 and 1).
+    """
+    if p < 0.001:
+        return "<0.001"
+    elif p > 0.999:
+        return ">0.999"
+    else:
+        return f"{p:.3f}"
+
+
+# Inferential statistics
+def ci_proportion_multinomial(
+    counts,
+    method: str = "goodman",
+    n_label: str = "n",
+    percent_label: str = "percent",
+) -> pd.DataFrame:
+    """Calculate  simultaneous confidence intervals for multinomial proportion.
+
+    More information in documentation of statsmodels'
+    multinomial_proportions_confint.
+
+    Args:
+        x (int): ps.Series, list or tuple with count data.
+        method (str, optional): Method. Defaults to "goodman".
+       n_label (str, optional): Name for column for counts.
+       percent_label (str, optional): Name for column for percentage values.
+
+    Returns:
+        pd.DataFrame: _description_
+
+    Examples:
+    >>> ci_proportion_multinomial([62, 33, 55])
+    """
+    assert type(counts) in [pd.Series, list, tuple]
+    if type(counts) is not pd.Series:
+        counts = pd.Series(counts)
+
+    return pd.concat(
+        [
+            (counts).rename(n_label),
+            (counts / sum(counts)).rename(percent_label) * 100,
+            pd.DataFrame(
+                sms.multinomial_proportions_confint(counts, method=method),
+                index=counts.index,
+                columns=["ci_lower", "ci_upper"],
+            )
+            * 100,
+        ],
+        axis=1,
+    )
+
+
+def test_chi_square_gof(f_obs, f_exp="all equal") -> str:
+    """Chi squared (χ²) goodness-of-fit (gof) test
+
+    Args:
+        f_obs (list[int]): Observed frequencies
+        f_exp str, list[int]: List of expected frequencies or "all equal" if
+              all frequencies are equal to the mean of observed frequencies.
+              Defaults to "all equal".
+
+    Returns:
+        str: test p value.
+    """
+    k = len(f_obs)
+    n = sum(f_obs)
+    exp = n / k
+    dof = k - 1
+    if f_exp == "all equal":
+        f_exp = [exp for _ in range(k)]
+    stat, p = sps.chisquare(f_obs=f_obs, f_exp=f_exp)
+    # May also be formatted this way:
+    return (
+        "Chi square test, "
+        f"χ²({dof}, n = {n}) = {round(stat, 2)}, p{format_p0(p)}"
+    )
+
+
+def pairwise_correlation(data, method="pearson"):
+    """Correlation analysis (including p value calculation)
+
+    Args:
+      data (pandas.DataFrame): dataset with numeric variables
+      method (str): correlation method, e.g., "pearson" or "spearman".
+
+    Return:
+      pandas.DataFrame with the resilts of correlation analysis.
+
+    """
+    return (
+        pg.pairwise_corr(data, method=method, padjust="holm")
+        .sort_values(by="r", key=abs, ascending=False)
+        .transform_column("p-corr", format_p0, "p_adj")
+        .select_columns(["X", "Y", "r", "CI95%", "p_adj"])
+    )
+
+
+def to_3_quality_groups(score, numeric=False):
+    """
+    Wine quality score will be recoded as 3 quality groups:
+
+    - score ≤ 4 = low,
+    - score [5-6] = medium,
+    - score ≥ 7 = high.
+
+    args:
+      score (int, float): numeric value from 0 to 10
+      numeric (bool): 
+         If True, this output dedicated for multinomial logistic regression:
+         low = 0, medium = 2 (reference group), high = 1.
+    """
+    assert 0 <= score <= 10
+    score = int(score)
+
+    if numeric:
+        if score <= 4:
+            return 0
+        elif 5 <= score <= 6:
+            # Used as a reference group
+            return 2
+        elif 7 <= score:
+            return 1
+    else:
+        if score <= 4:
+            return "low"
+        elif 5 <= score <= 6:
+            return "medium"
+        elif 7 <= score:
+            return "high"
+
+
+# Functions for regression/classification
+def do_sfs_lin_reg(formula, data, forward=True):
+    """Do sequential feature selection for Linear Regression
+
+    Args.:
+      formula (str): R style formula
+      data (pandas.DataFrame)
+      forward (bool): True – forward selection
+                      False – backward selection
+    """
+    lin_regression = LinearRegression(fit_intercept=True)
+
+    sfs = SequentialFeatureSelector(
+        lin_regression,
+        k_features="parsimonious",
+        forward=forward,
+        floating=True,
+        scoring="r2",
+        verbose=0,
+        cv=5,
+    )
+
+    y, X = patsy.dmatrices(formula + "+ 0", data, return_type="dataframe")
+
+    return sfs.fit(X, y)
+
+
+def get_sfs_performance_lin_reg(sfs_object, n_features):
+    """Return performance measures with certain number of features.
+
+    Args.:
+        sfs_object: result of function do_sfs_lin_reg()
+        n_features (int): number of features.
+    """
+    md = round(
+        np.median(sfs_object.get_metric_dict()[n_features]["cv_scores"]), 3
+    )
+    return {
+        "n_features": n_features,
+        "mean R²": round(
+            sfs_object.get_metric_dict()[n_features]["avg_score"], 3
+        ),
+        "median R²": md,
+        "sd R²": round(sfs_object.get_metric_dict()[n_features]["std_dev"], 3),
+    }
+
+
+def show_sfs_results_lin_reg(sfs_object, sub_title=""):
+    """Show results of do_sfs_lin_reg()
+
+    Args.:
+      sfs_object: result of function do_sfs_lin_reg()
+      sub_title (str): second line of title.
+    """
+    if sfs_object.forward:
+        sfs_type = "Forward"
+    else:
+        sfs_type = "Backward"
+
+    plt.clf()
+    fig, ax = plt.subplots(1, 2)
+
+    avg_score = [(i, c["avg_score"]) for i, c in sfs_object.subsets_.items()]
+    (
+        pd.DataFrame(
+            avg_score, columns=["n_features", "avg_score"]
+        ).plot.scatter(
+            x="n_features",
+            y="avg_score",
+            xlabel="Number of features included",
+            ylabel="Average R²",
+            ylim=(0.1, 0.8),
+            ax=ax[0],
+        )
+    )
+
+    cv_scores = {i: c["cv_scores"] for i, c in sfs_object.subsets_.items()}
+    (
+        pd.DataFrame(cv_scores)
+        .plot.box(
+            xlabel="Number of features included",
+            ylabel="R²",
+            ylim=(0.1, 0.8),
+            ax=ax[1],
+        )
+    )
+
+    if not sfs_object.forward:
+        ax[1].invert_xaxis()
+
+    main_title = (
+        f"{sfs_type} Feature Selection with {sfs_object.cv}-fold CV "
+        + f"\n{sub_title}"
+    )
+
+    fig.suptitle(main_title)
+    plt.tight_layout()
+    plt.show()
+
+    # Print results
+    n_selected = f"n = {len(sfs_object.k_feature_names_)}"
+    r_sq_selected = f"avg. R² = {sfs_object.k_score_:.3f}"
+
+    print(main_title)
+    print("\nSelected variables:")
+    print(f"[ {n_selected}, {r_sq_selected} ]\n")
+    for i, name in enumerate(sfs_object.k_feature_names_, start=1):
+        print(f"{i}. {name}")
+
+
+def get_regression_performance(y_true, y_pred, name=""):
+    """Evaluate regression model performance
+
+    Calculate R², RMSE, and SD of predicted variable
+
+    Args.:
+      y_true, y_pred: true and predicted numeric values.
+      name (str): the name of investigated set.
+    """
+    return (
+        pd.DataFrame(
+            {
+                "set": name,
+                "n": len(y_true),
+                "SD": [float(np.std(y_true))],
+                "RMSE": [float(np.sqrt(mse(y_true, y_pred)))],
+                "R²": [r2_score(y_true, y_pred)],
+            }
+        )
+        .eval("RMSE_SD_ratio = RMSE/SD")
+        .eval("SD_RMSE_ratio = SD/RMSE")
+    )
+
+
+def predict_class_mnlogit(model, data):
+    """Predict classes from multinomial logit (mnlogit) model.
+    
+    Args.: 
+        model: trained mnlogit model.
+        data: pandas.DataFrame
+      
+    Return: numeric class codes.
+    """
+    return np.asarray(model.predict(data)).argmax(1)
+
+
+def print_classification_report(true_class, predicted_class):
+    """Print summary of classification performance
+    
+    Args.:
+        true_class, predicted_class: data sequences of the same length:
+                                     with class names/indicators.
+    """
+    kappa = cohen_kappa_score(true_class, predicted_class)
+    print(f"kappa = {kappa:.3f}")
+    print(classification_report(true_class, predicted_class))
+    print("Confusion matrix (rows - true, columns - predicted):")
+    print(confusion_matrix(true_class, predicted_class))
+
+
+def do_mnlogit(formula, data):
+    """Perform multivatiate logistic regression and print the results.
+
+    formula (str): model formula
+    data (pandas.DataFrame): dataset
+    """
+    
+    response_var = formula.split("~")[0].strip()
+    
+    # Do multinomial logistic regression
+    mnlogit_model = smf.mnlogit(formula, data).fit();
+
+    # Evaluate performance
+    print(mnlogit_model.summary2())
+    
+    # Classification report
+    gr_pred = predict_class_mnlogit(mnlogit_model, data)
+    gr_true = data[response_var]
+    print_classification_report(gr_true, gr_pred)
+    
+    # Output
+    return mnlogit_model
+```
+
+
+```{python}
+#| code-summary: "Code: Python functions by other authors"
+#| label: python-functions-2
+#| code-fold: true
+
+# Class for linear regression diagnostics with R-style diagnostic plots
+
+# NOTE: This class for linear regression assumption checking should be in 
+# a separate file, but RStudio failed to load custom Python modules.
+
+# Source:
+# https://www.statsmodels.org/dev/examples/notebooks/generated/linear_regression_diagnostics_plots.html
+
+# Base code
+import numpy as np
+import seaborn as sns
+import statsmodels
+from statsmodels.tools.tools import maybe_unwrap_results
+from statsmodels.graphics.gofplots import ProbPlot
+from statsmodels.stats.outliers_influence import variance_inflation_factor
+import matplotlib.pyplot as plt
+from typing import Type
+
+style_talk = "seaborn-talk"  # refer to plt.style.available
+
+
+class Linear_Reg_Diagnostic:
+    """
+    Diagnostic plots to identify potential problems in a linear regression fit.
+    Mainly,
+        a. non-linearity of data
+        b. Correlation of error terms
+        c. non-constant variance
+        d. outliers
+        e. high-leverage points
+        f. collinearity
+
+    Author:
+        Prajwal Kafle (p33ajkafle@gmail.com, where 3 = r)
+        Does not come with any sort of warranty.
+        Please test the code one your end before using.
+    """
+
+    def __init__(
+        self,
+        results: Type[
+            statsmodels.regression.linear_model.RegressionResultsWrapper
+        ],
+    ) -> None:
+        """
+        For a linear regression model, generates following diagnostic plots:
+
+        a. residual
+        b. qq
+        c. scale location and
+        d. leverage
+
+        and a table
+
+        e. vif
+
+        Args:
+            results (Type[statsmodels.regression.linear_model.RegressionResultsWrapper]):
+            must be instance of statsmodels.regression.linear_model object
+
+        Raises:
+            TypeError: if instance does not belong to above object
+
+        Example:
+        >>> import numpy as np
+        >>> import pandas as pd
+        >>> import statsmodels.formula.api as smf
+        >>> x = np.linspace(-np.pi, np.pi, 100)
+        >>> y = 3*x + 8 + np.random.normal(0,1, 100)
+        >>> df = pd.DataFrame({'x':x, 'y':y})
+        >>> res = smf.ols(formula= "y ~ x", data=df).fit()
+        >>> cls = Linear_Reg_Diagnostic(res)
+        >>> cls(plot_context="seaborn-paper")
+
+        In case you do not need all plots you can also independently
+        make an individual plot/table
+        in following ways
+
+        >>> cls = Linear_Reg_Diagnostic(res)
+        >>> cls.residual_plot()
+        >>> cls.qq_plot()
+        >>> cls.scale_location_plot()
+        >>> cls.leverage_plot()
+        >>> cls.vif_table()
+        """
+
+        if (
+            isinstance(
+                results,
+                statsmodels.regression.linear_model.RegressionResultsWrapper,
+            )
+            is False
+        ):
+            raise TypeError(
+                "result must be instance of "
+                "statsmodels.regression.linear_model.RegressionResultsWrapper "
+                "object"
+            )
+
+        self.results = maybe_unwrap_results(results)
+
+        self.y_true = self.results.model.endog
+        self.y_predict = self.results.fittedvalues
+        self.xvar = self.results.model.exog
+        self.xvar_names = self.results.model.exog_names
+
+        self.residual = np.array(self.results.resid)
+        influence = self.results.get_influence()
+        self.residual_norm = influence.resid_studentized_internal
+        self.leverage = influence.hat_matrix_diag
+        self.cooks_distance = influence.cooks_distance[0]
+        self.nparams = len(self.results.params)
+
+    def __call__(self, plot_context="seaborn-paper"):
+        # print(plt.style.available)
+        with plt.style.context(plot_context):
+            fig, ax = plt.subplots(nrows=2, ncols=2, figsize=(10, 10))
+            self.residual_plot(ax=ax[0, 0])
+            self.qq_plot(ax=ax[0, 1])
+            self.scale_location_plot(ax=ax[1, 0])
+            self.leverage_plot(ax=ax[1, 1])
+            plt.show()
+
+        # self.vif_table()
+        return fig, ax
+
+    def residual_plot(self, ax=None):
+        """
+        Residual vs Fitted Plot
+
+        Graphical tool to identify non-linearity.
+        (Roughly) Horizontal red line is an indicator that the residual has
+        a linear pattern
+        """
+        if ax is None:
+            fig, ax = plt.subplots()
+
+        sns.residplot(
+            x=self.y_predict,
+            y=self.residual,
+            lowess=True,
+            scatter_kws={"alpha": 0.5},
+            line_kws={"color": "red", "lw": 1, "alpha": 0.8},
+            ax=ax,
+        )
+
+        # annotations
+        residual_abs = np.abs(self.residual)
+        abs_resid = np.flip(np.sort(residual_abs))
+        abs_resid_top_3 = abs_resid[:3]
+        for i, _ in enumerate(abs_resid_top_3):
+            ax.annotate(i, xy=(self.y_predict[i], self.residual[i]), color="C3")
+
+        ax.set_title("Residuals vs Fitted", fontweight="bold")
+        ax.set_xlabel("Fitted values")
+        ax.set_ylabel("Residuals")
+        return ax
+
+    def qq_plot(self, ax=None):
+        """
+        Standarized Residual vs Theoretical Quantile plot
+
+        Used to visually check if residuals are normally distributed.
+        Points spread along the diagonal line will suggest so.
+        """
+        if ax is None:
+            fig, ax = plt.subplots()
+
+        QQ = ProbPlot(self.residual_norm)
+        QQ.qqplot(line="45", alpha=0.5, lw=1, ax=ax)
+
+        # annotations
+        abs_norm_resid = np.flip(np.argsort(np.abs(self.residual_norm)), 0)
+        abs_norm_resid_top_3 = abs_norm_resid[:3]
+        for r, i in enumerate(abs_norm_resid_top_3):
+            ax.annotate(
+                i,
+                xy=(
+                    np.flip(QQ.theoretical_quantiles, 0)[r],
+                    self.residual_norm[i],
+                ),
+                ha="right",
+                color="C3",
+            )
+
+        ax.set_title("Normal Q-Q", fontweight="bold")
+        ax.set_xlabel("Theoretical Quantiles")
+        ax.set_ylabel("Standardized Residuals")
+        return ax
+
+    def scale_location_plot(self, ax=None):
+        """
+        Sqrt(Standarized Residual) vs Fitted values plot
+
+        Used to check homoscedasticity of the residuals.
+        Horizontal line will suggest so.
+        """
+        if ax is None:
+            fig, ax = plt.subplots()
+
+        residual_norm_abs_sqrt = np.sqrt(np.abs(self.residual_norm))
+
+        ax.scatter(self.y_predict, residual_norm_abs_sqrt, alpha=0.5)
+        sns.regplot(
+            x=self.y_predict,
+            y=residual_norm_abs_sqrt,
+            scatter=False,
+            ci=False,
+            lowess=True,
+            line_kws={"color": "red", "lw": 1, "alpha": 0.8},
+            ax=ax,
+        )
+
+        # annotations
+        abs_sq_norm_resid = np.flip(np.argsort(residual_norm_abs_sqrt), 0)
+        abs_sq_norm_resid_top_3 = abs_sq_norm_resid[:3]
+        for i in abs_sq_norm_resid_top_3:
+            ax.annotate(
+                i, xy=(self.y_predict[i], residual_norm_abs_sqrt[i]), color="C3"
+            )
+        ax.set_title("Scale-Location", fontweight="bold")
+        ax.set_xlabel("Fitted values")
+        ax.set_ylabel(r"$\sqrt{|\mathrm{Standardized\ Residuals}|}$")
+        return ax
+
+    def leverage_plot(self, ax=None):
+        """
+        Residual vs Leverage plot
+
+        Points falling outside Cook's distance curves are considered
+        observation that can sway the fit aka are influential.
+        Good to have none outside the curves.
+        """
+        if ax is None:
+            fig, ax = plt.subplots()
+
+        ax.scatter(self.leverage, self.residual_norm, alpha=0.5)
+
+        sns.regplot(
+            x=self.leverage,
+            y=self.residual_norm,
+            scatter=False,
+            ci=False,
+            lowess=True,
+            line_kws={"color": "red", "lw": 1, "alpha": 0.8},
+            ax=ax,
+        )
+
+        # annotations
+        leverage_top_3 = np.flip(np.argsort(self.cooks_distance), 0)[:3]
+        for i in leverage_top_3:
+            ax.annotate(
+                i, xy=(self.leverage[i], self.residual_norm[i]), color="C3"
+            )
+
+        xtemp, ytemp = self.__cooks_dist_line(0.5)  # 0.5 line
+        ax.plot(
+            xtemp, ytemp, label="Cook's distance", lw=1, ls="--", color="red"
+        )
+        xtemp, ytemp = self.__cooks_dist_line(1)  # 1 line
+        ax.plot(xtemp, ytemp, lw=1, ls="--", color="red")
+
+        ax.set_xlim(0, max(self.leverage) + 0.01)
+        ax.set_title("Residuals vs Leverage", fontweight="bold")
+        ax.set_xlabel("Leverage")
+        ax.set_ylabel("Standardized Residuals")
+        ax.legend(loc="upper right")
+        return ax
+
+    def vif_table(self):
+        """
+        VIF table
+
+        VIF, the variance inflation factor, is a measure of multicollinearity.
+        VIF > 5 for a variable indicates that it is highly collinear with the
+        other input variables.
+        """
+        vif_df = pd.DataFrame()
+        vif_df["Features"] = self.xvar_names
+        vif_df["VIF Factor"] = [
+            variance_inflation_factor(self.xvar, i)
+            for i in range(self.xvar.shape[1])
+        ]
+
+        return vif_df.sort_values("VIF Factor").round(2)
+
+    def __cooks_dist_line(self, factor):
+        """
+        Helper function for plotting Cook's distance curves
+        """
+        p = self.nparams
+        formula = lambda x: np.sqrt((factor * p * (1 - x)) / x)
+        x = np.linspace(0.001, max(self.leverage), 50)
+        y = formula(x)
+        return x, y
+```
+
+
+## Import Data
+
+Data was provided as a text file.
+
+<details class="with-border">
+<summary>Preview of data file</summary>
+
+A few lines from the text file with data:
+
+```{r}
+#| code-summary: "R code"
+read_lines("data/winequality-red.csv", n_max = 6) |> writeLines()
+```
+
+</details>
+
+
+```{python}
+wine_raw = pd.read_csv("data/winequality-red.csv", delimiter=";")
+```
+
+The dataset contains 1599 rows and 12 columns.
+All variables are numeric.
+No missing values were found.
+
+
+<details class="with-border">
+<summary>Details: inspect `wine_raw` dataset</summary>
+
+The properties of the imported dataset:
+
+```{python}
+wine_raw.shape
+```
+
+```{r}
+#| code-summary: "R code"
+head(py$wine_raw)
+```
+
+```{r}
+#| code-summary: "R code"
+glimpse(py$wine_raw)
+```
+
+Number of missing values:
+
+```{python}
+wine_raw.isna().sum()
+```
+
+```{python}
+wine_raw.info()
+```
+
+</details>
+
+
+## Recoding and Renaming Variables
+
+Variable names will be changed into lower snake case (e.g., to make them easier to be used in statistical model formulas). 
+Wine quality score will be merged into quality groups as follows:
+
+- ≤ 4 – low,
+- [5-6] – medium,
+- ≥ 7 – high.
+
+
+```{python}
+wine = wine_raw.clean_names()
+
+wine['quality_gr'] = pd.Categorical(
+    wine['quality'].apply(to_3_quality_groups),
+    categories=["low", "medium", "high"],
+    ordered=True
+)
+
+del wine_raw
+```
+
+
+How do quality scores and quality groups match?
+
+
+```{r}
+#| code-summary: "R code"
+#| label: tbl-quality-match
+#| tbl-cap:  Match between wine quality scores (columns) and
+#|           quality groups (rows). Values indicate counts.
+#|           "Sum" shows column/row sums.
+py$wine |>
+  with(table(quality_gr, quality)) |>
+  addmargins() |>
+  pander::pander()
+```
+
+Variable recoding was performed without errors as numbers add up correctly.
+
+
+<details class="with-border">
+<summary>Details: inspect `wine` dataset</summary>
+
+Column names:
+
+```{r}
+#| code-summary: "R code"
+colnames(py$wine)
+```
+Dataset:
+
+```{r}
+#| code-summary: "R code"
+head(py$wine)
+```
+
+```{r}
+#| code-summary: "R code"
+glimpse(py$wine)
+```
+
+</details>
+
+
+
+## Split into Training/Test Sets
+
+In this project, for more accurate models' prediction power, a **80:20 train/test hold-out split** with stratification by wine quality scores will be used.
+
+```{python}
+wine_train, wine_test = train_test_split(
+    wine,
+    test_size=0.2,
+    random_state=50,
+    stratify=wine['quality']
+)
+
+del wine
+```
+
+The sizes of training and test sets after splitting are 1279:320 wine samples.
+If needed, find more details below.
+
+
+
+<details class="with-border">
+<summary>Details: inspect data after splitting to train/test sets</summary>
+
+The dimensions of **training set**:
+```{python}
+wine_train.shape
+```
+
+The dimensions of **test set**:
+```{python}
+wine_test.shape
+```
+
+Is the split really stratified? 
+Yes as sample size ratios (column `ratio`) in all strata are around 0.80:
+
+```{r}
+#| code-summary: "R code"
+
+full_join(
+  py$wine_train |> count(quality, name = "n_train"),
+  py$wine_test |> count(quality, name = "n_test"),
+  by = "quality"
+) |>
+  mutate(ratio = round(n_train / (n_train + n_test), digits = 2))
+```
+
+Dataset (train only):
+
+```{r}
+#| code-summary: "R code"
+head(py$wine_train)
+```
+
+```{r}
+#| code-summary: "R code"
+glimpse(py$wine_train)
+```
+
+
+</details>
+
+To avoid additional biases, test set will not be investigated until the final prediction models are created.
+Now let's focus on training set only.
+
+::: {.callout-important}
+#### Use training set only
+
+From here, further exploratory and inferential analysis as well as statistical modelling will use **training set only**.
+:::
+
+
+## Further Inspection of Training Set
+
+Graphical and numeric inspection of each variable (find the details below) revealed that some variables are either moderately (skewness > 0.5) or highly (skewness > 1) right-skewed.
+As it is planned to use linear models in this project, skewed data may lead to non-linearities.
+This issue will be accounted for in the next subsection.
+
+
+<details class="with-border">
+<summary>Details: plots and summaries of each variable on original scale</summary>
+
+```{r paged.print=FALSE}
+#| code-summary: "R code"
+#| label: desc-single-orig
+#| fig-cap: Summary of variables on original scale.
+#| fig-height: 4
+DescTools::Desc(
+  py$wine_train |> mutate(quality = ordered(quality)),
+  verbose = 3
+)
+```
+
+</details>
+
+
+## Log-Transformation of Right-Skewed Variables
+
+The amount of skewness in variables was investigated before (columns `skewness_original` in the table below) and after (`skewness_after_log`) log-transformation, which was applied for variables with skewness above 1.
+
+```{python}
+skewness = (
+    wine_train
+    .skew(numeric_only=True)
+    .sort_values(ascending=False)
+    .rename("skewness_original")
+)
+
+skewed_vars = skewness.where(skewness > 1).dropna().index.tolist()
+
+skewness_after = (
+    wine_train
+    .transform_columns(skewed_vars, np.log10)
+    .skew(numeric_only=True)
+    .rename("skewness_after_log")
+)
+
+skew_diff = (skewness_after - skewness).rename("difference")
+
+pd.concat(
+    [skewness, skewness_after, skew_diff], axis=1
+    ).reset_index(names="variable")
+```
+
+<details class="with-border">
+<summary>Guidelines to evaluate degree of skewness (coefficient of asymmetry)</summary>
+
+I use these guidelines to interpret skewness coefficient.
+
+<!-- ... -->
+a) Interpret the direction of skewness:
+    - $< 0$: left-skewed data;
+    - $0$: ideally symmetric data;
+    - $0 <$: right-skewed data.
+
+<!-- ... -->
+b) Interpret the amount of skewness (**rule of thumb**):
+    - $0$: ideally symmetric;
+    - $-0.5$ -- $+0.5$: almost symmetric;
+    - $-1$ -- $-0.5$ and $+0.5$ -- $+1$: moderate asymmetry;
+    - $< -1$ and $+1 < ~$: high asymmetry.
+
+</details>
+
+In all cases, amount of skewness was reduced.
+<!-- Just for `alcohol`, the coefficient changed not much. -->
+<!-- And in case of `volatile_acidity`, from moderately right-skewed data became into slightly left-sewed. -->
+
+
+Apply the transformation to the dataset:
+
+```{python}
+# Create a copy of data frame that contains log-transformed variables
+new_names_map = {i:"log_" + str(i) for i in skewed_vars}
+
+wine_train_log = (
+    wine_train
+    .transform_columns(skewed_vars, np.log10)
+    .rename(new_names_map, axis=1)
+)
+```
+
+
+<details class="with-border">
+<summary>Details: inspect data after log-transformation</summary>
+
+Column names:
+
+```{r}
+#| code-summary: "R code"
+colnames(py$wine_train_log)
+```
+
+Dataset:
+
+```{r}
+#| code-summary: "R code"
+head(py$wine_train_log)
+```
+
+```{r}
+#| code-summary: "R code"
+glimpse(py$wine_train_log)
+```
+
+</details>
+
+
+
+<details class="with-border">
+<summary>Details: plots and summaries of variables after log-transformation</summary>
+
+```{r paged.print=FALSE}
+#| code-summary: "R code"
+#| label: desc-single-log
+#| fig-cap-0: Summary of variables after log-transformation.
+#| fig-height: 4
+DescTools::Desc(
+  py$wine_train_log |> mutate(quality = ordered(quality)),
+  verbose = 3, digits = 3
+)
+```
+
+</details>
+
+
+# Analysis
+
+## Correlation: All Pairs {#sec-correlation-all-pairs}
+
+In this section we will look into the relationships between each pair of numeric variables.
+We will start from graphical analysis (scatter plot matrices) and later will proceed to linear correlation analysis.
+
+Scatter plot matrices of non-transformed and log-transformed variables are presented in [Fig. @fig-pairplot-orig] and [Fig. @fig-pairplot-log]. In the plot we see, that some variables are related (e.g., density and fixed acidity). It can also be noticed, that after log-transformation the relationship between some variables (e.g., pH and fixed acidity) look more linear. On the other hand, the plots are small and there are many points, so further investigation is needed to understand data better.
+
+::: {.panel-tabset}
+
+### Scatterplot Matrix (original values)
+
+```{python}
+#| label: fig-pairplot-orig
+#| fig-cap: Relationships between pairs of variables on the original scale.
+#| fig-width: 5
+#| fig-height: 5
+#| out-width: "700px"
+#| message: false
+#| warning: false
+
+fig_sns_1 = sns.pairplot(
+    wine_train,
+    kind="hist", 
+    height=1,
+    corner=True,
+);
+
+for ax in fig_sns_1.axes.flatten():
+    if ax:
+        # rotate x axis labels
+        ax.set_xlabel(ax.get_xlabel(), rotation = 90);
+        # rotate y axis labels
+        ax.set_ylabel(ax.get_ylabel(), rotation = 0);
+        # set y labels alignment
+        ax.yaxis.get_label().set_horizontalalignment('right');
+      
+fig_sns_1.tight_layout();
+plt.show()
+```
+
+
+### Scatterplot Matrix (log-transformed values)
+
+```{python}
+#| label: fig-pairplot-log
+#| fig-cap: Relationships between pairs of variables after log-transformation 
+#|          of right-skewed variables.
+#| fig-width: 5
+#| fig-height: 5
+#| out-width: "700px"
+#| message: false
+#| warning: false
+
+fig_sns_2 = sns.pairplot(
+    wine_train_log,
+    kind="hist", 
+    height=1,
+    corner=True,
+);
+
+for ax in fig_sns_2.axes.flatten():
+  if ax:
+    # rotate x axis labels
+    ax.set_xlabel(ax.get_xlabel(), rotation = 90);
+    # rotate y axis labels
+    ax.set_ylabel(ax.get_ylabel(), rotation = 0);
+    # set y labels alignment
+    ax.yaxis.get_label().set_horizontalalignment('right');
+    
+fig_sns_2.tight_layout();
+plt.show()
+```
+
+:::
+
+
+
+Next, the influence of logarithmic transformation on change in linear correlation coefficient is analyzed and summarized in the table below. The *negative* values or `r_abs_difference` (difference in absolute values of correlation coefficient) means that correlation decreased, *positive* value shows increase in correlation strength.
+
+```{python paged.print=TRUE}
+# Calculate correlation
+corr_df_orig = pairwise_correlation(wine_train)
+corr_df_log = pairwise_correlation(wine_train_log)
+
+# Investigate the changes in coefficients due to transformation
+(
+    pd.concat([
+        corr_df_orig.r.rename("r_orig_var"),
+        corr_df_log.r.rename("r_log_var")
+        ], axis=1
+        )
+        .eval("r_abs_difference = abs(r_log_var) - abs(r_orig_var)")
+        .select_columns("r_abs_difference")
+        .agg(["min", "mean", "std", "max"])
+)
+```
+
+The average shift in correlation coefficient was only slight, as in some coefficient started showing stronger, in other cases weaker correlation. The cases with largest positive and negative change (indicated by the the *min* and *max* values of `r_abs_difference`) are analyzed in the details sections. To sum up, it seams that in both cases log-transformation the true correlation was reflected better by the coefficients after the transformation.
+
+<details class="with-border">
+<summary>Details: case study of `chlorides` vs. `sulphates` </summary>
+
+After log-transformation, linear correlation strength between `chlorides` and `sulphates` **decreased** most evidently (change in absolute values is -0.11). It seems that the linear correlation coefficient size between these two variables is driven by 17 outlying points (where `chlorides` > 0.3, red dashed line in the plot below). Logarithmic transformation reduces this issue and true correlation strength is reflected better in this case. On the other hand, rank correlation coefficient suggests that there is no correlation or it is very weak.
+
+```{r}
+#| code-summary: "R code"
+
+ggplot(py$wine_train, aes(x = chlorides, y = sulphates)) +
+  geom_point(alpha = 0.1, pch = 19) +
+  geom_vline(xintercept = 0.3, color = "darkred", lty = 2, alpha = 0.5) +
+  ggtitle("Variables on Original Scale") +
+  ggplot(py$wine_train, aes(x = log(chlorides), y = log(sulphates))) +
+  geom_point(alpha = 0.1, pch = 19) +
+  ggtitle("Variables on Log Scale")
+```
+
+
+```{r}
+#| code-summary: "R code"
+py$wine_train |> count(chlorides > 0.3)
+```
+
+```{r}
+#| code-summary: "R code"
+
+c(
+  "r_original_variables" = with(
+    py$wine_train, cor(chlorides, sulphates, method = "pearson")
+  ),
+  "r_log_variables" = with(
+    py$wine_train,
+    cor(log(chlorides), log(sulphates), method = "pearson")
+  ),
+  "r_without_17_outliers" = with(
+    py$wine_train |> filter(chlorides < 0.3),
+    cor(chlorides, sulphates, method = "pearson")
+  ),
+  "r_spearman_all_data" = with(
+    py$wine_train, cor(chlorides, sulphates, method = "spearman")
+  )
+) |> round(2)
+```
+</details>
+
+
+
+
+<details class="with-border">
+<summary>Details: case study of `chlorides` vs. `density` </summary>
+
+After log-transformation, linear correlation size between `chlorides` and `density` **increased** most evidently (change in absolute values is +0.15). It seems that the linear correlation coefficient size again was influenced by a group of 17 outlying points (where `chlorides` > 0.3, red dashed line in the plot below) and logarithmic transformation reduced this issue and correlation of log-transformed variables and of non-transformed variables without the 17 points is almost of the same size (r = 0.36 vs. r = 0.34).
+
+```{r}
+#| code-summary: "R code"
+ggplot(py$wine_train, aes(x = chlorides, y = density)) +
+  geom_point(alpha = 0.1, pch = 19) +
+  geom_vline(xintercept = 0.3, color = "darkred", lty = 2, alpha = 0.5) +
+  ggtitle("Variables on Original Scale") +
+  ggplot(py$wine_train, aes(x = log(chlorides), y = density)) +
+  geom_point(alpha = 0.1, pch = 19) +
+  ggtitle("Log-Transformed Chloride")
+```
+
+
+```{r}
+#| code-summary: "R code"
+py$wine_train |> count(chlorides > 0.3)
+```
+
+```{r}
+#| code-summary: "R code"
+c(
+  "r_original_variables" = with(
+    py$wine_train, cor(chlorides, density, method = "pearson")
+  ),
+  "r_log_variables" = with(
+    py$wine_train,
+    cor(log(chlorides), density, method = "pearson")
+  ),
+  "r_without_17_outliers" = with(
+    py$wine_train |> filter(chlorides < 0.3),
+    cor(chlorides, density, method = "pearson")
+  ),
+  "r_spearman_all_data" = with(
+    py$wine_train, cor(chlorides, density, method = "spearman")
+  )
+) |> round(2)
+```
+</details>
+
+
+
+[Fig. @fig-correlation-matrix-log] contains a graphical representation of all pair-wise correlation coefficients.
+The "details" sections below contain numeric results while the two tables below the section list correlations with quality sore and with alcohol contents.
+
+```{r, fig.width=8, fig.height=7}
+#| code-summary: "R code"
+#| label: fig-correlation-matrix-log
+#| fig-cap: The results of correlation analysis after
+#|          right-skewed variables were log-transformed.
+#|          Numbers in cells indicate Pearson correlation coefficient.
+#|          Cross-out cells show statistically insignificant results.
+#|          Significance level is 0.05, p values with Holm correction were used.
+#| fig-width: 8
+#| fig-height: 7
+
+py$wine_train_log |>
+  select_if(is.numeric) |>
+  ggstatsplot::ggcorrmat() +
+  scale_y_discrete(limits = rev)
+```
+
+
+
+<details class="with-border">
+<summary>Details: correlation table (variables on original scale)</summary>
+
+
+::: {.callout-important}
+It can be suspected that linear correlation coefficients may not reflect the true strength of relationship between skewed variables correctly.
+:::
+
+
+```{r}
+#| code-summary: "R code"
+#| label: atbl-corr-orig
+#| tbl-cap: The results of correlation analysis as correlation matrix.
+#|          All variables are on the **original scale**.
+py$corr_df_orig |>
+  rowwise() |>
+  mutate(
+    `CI95%_lower` = `CI95%`[[1]],
+    `CI95%_upper` = `CI95%`[[2]],
+    r = round(r, digits = 2)
+  ) |>
+  select(-`CI95%`) |>
+  ungroup() |>
+  rownames_to_column("index")
+```
+
+</details>
+
+
+
+<details class="with-border">
+<summary>Details: correlation table (after log-transformation)</summary>
+
+```{r}
+#| code-summary: "R code"
+#| label: atbl-corr-log
+#| tbl-cap: The results of correlation analysis after
+#|          right-skewed variables were **log-transformed**.
+py$corr_df_log |>
+  rowwise() |>
+  mutate(
+    `CI95%_lower` = `CI95%`[[1]],
+    `CI95%_upper` = `CI95%`[[2]],
+    r = round(r, digits = 2)
+  ) |>
+  select(-`CI95%`) |>
+  ungroup() |>
+  rownames_to_column("index")
+```
+
+</details>
+
+
+
+**Results.**
+The strongest correlation is detected between `log_free_sulfur_dioxide` vs. `log_total_sulfur_dioxide` (r =, 0.79 [0.77, 0.81], p_adj < 0.001) and `log_fixed_acidity` and `ph` (r = -0.71, 95% CI [-0.74, -0.69], p_adj < 0.001). In statistical modeling these variables will be used as explanatory variables. **This means** that in linear modeling, a multicollinearity problem may appear.  So we have to pay attention to this while interpreting regression coefficients results.
+
+
+## Exploratory PCA
+
+### Model Diagnostics
+
+Principal component analysis (PCA) will be used to explore relationships between target (wine quality score, quality group as well as alcohol content) and other variables.
+
+```{r}
+#| code-summary: "R code"
+pca_model <- prcomp(py$wine_train_log |> select_if(is.numeric), scale. = TRUE)
+```
+
+```{r}
+#| code-summary: "R code"
+fviz_eig(pca_model, addlabels = TRUE) + ylim(NA, 29)
+```
+
+
+
+<details class="with-border">
+<summary>Details: table with eigenvalues and percentage of explained variance</summary>
+
+```{r}
+#| code-summary: "R code"
+get_eigenvalue(pca_model) |> round(1)
+```
+</details>
+
+- To explain more than 80 % of variance, 5 components are required.
+- "Elbow" method suggests 3-4 components.
+- Eigenvalue above 1 rule suggest 4-5 components.
+
+These numbers might be important while doing feature selection.
+For visual inspection, it will be used the first 3 principal components that account for 26.8 %, 20.1 %, and 14.6 % respectively.
+
+
+<!-- ... -->
+
+### PCA Individuals Map
+
+In PCA "individuals map", no very clear clusters are visible. 
+Only it can be noticed that in the space of PC1 and PC2 (denoted as Dim1 and Dim2), roughly half area with points is more dense, and the other half is less dense.
+
+```{r}
+#| code-summary: "R code"
+#| warning: false
+fviz_pca_ind(pca_model, label = FALSE, alpha = 0.2)
+```
+
+```{r}
+#| code-summary: "R code"
+#| warning: false
+fviz_pca_ind(pca_model, axes = c(3, 2), label = FALSE, alpha = 0.2)
+```
+
+After adding colors to the points, 3 partly overlapping clusters are visible.
+The direction of cluster centroids match the order of quality groups from lowest to highest.
+It seems that all 3 first PCs have influence on cluster separability.
+
+```{r}
+#| code-summary: "R code"
+#| warning: false
+legend_txt <- "Quality"
+
+fviz_pca_ind(pca_model,
+  label = FALSE, alpha = 0.3,
+  habillage = py$wine_train_log$quality_gr, addEllipses = TRUE,
+  palette = "Dark2"
+) +
+  labs(color = legend_txt, fill = legend_txt, shape = legend_txt)
+```
+
+```{r}
+#| code-summary: "R code"
+#| warning: false
+fviz_pca_ind(pca_model,
+  axes = c(3, 2), label = FALSE, alpha = 0.3,
+  habillage = py$wine_train_log$quality_gr, addEllipses = TRUE,
+  palette = "Dark2"
+) +
+  labs(color = legend_txt, fill = legend_txt, shape = legend_txt)
+```
+
+### PCA Correlation Circle Plot
+
+The **purpose** of *correlation circle plot* is to investigate relationship between variables.
+The angle between arrows shows the strength of relationship in the analyzed PCA space, the length of arrow shows how well variable is represented in the PCA space.
+
+
+The variables of interest are quality **score** and fraction of **alcohol** content.
+These variables will be highlighted.
+
+```{r}
+#| code-summary: "R code"
+highlight_vars <- recode_factor(
+  names(py$wine_train_log |> select_if(is.numeric)),
+  "quality" = "quality",
+  "alcohol" = "alcohol",
+  .default =  "other"
+)
+```
+
+```{r fig.width=5, fig.height=5}
+#| code-summary: "R code"
+#| fig-width: 5
+#| fig-height: 5
+fviz_pca_var(pca_model,
+  axes = c(1, 2), repel = TRUE, alpha = 0.7,
+  col.var = highlight_vars, palette = c("black", "darkred", "skyblue3")
+) +
+  lims(x = c(-1.1, 1.1), y = c(-1.1, 1.1)) +
+  theme(legend.position = "none")
+```
+
+```{r fig.width=5, fig.height=5}
+#| code-summary: "R code"
+#| fig-width: 5
+#| fig-height: 5
+fviz_pca_var(pca_model,
+  axes = c(3, 2), repel = TRUE, alpha = 0.7,
+  col.var = highlight_vars, palette = c("black", "darkred", "skyblue3")
+) +
+  lims(x = c(-1.1, 1.1), y = c(-1.1, 1.1)) +
+  theme(legend.position = "none")
+```
+
+It seems that alcohol and quality score are related positively (arrows point to almost the same directions) while alcohol and density are negatively correlated (arrows point to opposite directions) in PC2 and PC3 space.
+
+
+### PCA Biplot
+
+The **purpose** of PCA biplots is to investigate the relationship between patterns in points (e.g., clusters) and variables.
+
+```{r fig.width=6, fig.height=4}
+#| code-summary: "R code"
+#| fig-width: 7
+#| fig-height: 5
+#| warning: false
+
+fviz_pca_biplot(pca_model,
+  axes = c(1, 2), repel = TRUE, alpha.ind = 0.2, alpha.var = 0.85,
+  col.var = "black",
+  label = "var",
+  addEllipses = TRUE,
+  habillage = py$wine_train_log$quality_gr,
+  palette = "Dark2"
+) +
+  labs(color = legend_txt, fill = legend_txt, shape = legend_txt)
+```
+
+```{r fig.width=6, fig.height=4}
+#| code-summary: "R code"
+#| fig-width: 7
+#| fig-height: 5
+#| warning: false
+
+fviz_pca_biplot(pca_model,
+  axes = c(3, 2), repel = TRUE, alpha.ind = 0.2, alpha.var = 0.85,
+  col.var = "black",
+  label = "var",
+  addEllipses = TRUE,
+  habillage = py$wine_train_log$quality_gr,
+  palette = "Dark2"
+) +
+  labs(color = legend_txt, fill = legend_txt, shape = legend_txt)
+```
+
+
+We can assume, that volatile acidity may be related to differences between medium and low quality wines while (in PC1-PC2 space the direction of volatile acidity arrow almost coincides with the direction between the centroids of medium and low quality groups).
+And differences between medium and high may be related to alcohol contents (see biplot of PC2-PC3 space).
+
+
+
+## Modelling Wine Quality
+
+The **purpose** of this section is to create a **logistic regression model** that predicts **wine quality**.
+
+Quick pair-wise summary of how other variables relate to the quality score and quality group is presented in the "details" sections below. And summary table of correlation between quality score and other variables is shown below the "details" sections (the correlation analysis was carried out in section "@sec-correlation-all-pairs").
+
+
+<details class="with-border">
+<summary>Details: plots and summaries of variables by wine quality scores</summary>
+
+```{r}
+names(py$wine_train_log)
+```
+
+```{r paged.print=FALSE, fig.height=4}
+#| code-summary: "R code"
+#| label: afig-desc-pairs-quality-scores
+#| fig-cap: Summary of variables by wine quality scores.
+#| fig-height: 4
+#| fig-width: 8
+py$wine_train_log %>%
+  mutate(quality = ordered(quality)) %>%
+  DescTools::Desc(. ~ quality, data = ., verbose = 3)
+```
+
+</details>
+
+
+
+<details class="with-border">
+<summary>Details: plots and summaries of variables by wine quality group</summary>
+
+```{r paged.print=FALSE, fig.height=4, fig.width=8}
+#| code-summary: "R code"
+#| label: afig-desc-pairs-quality-gr
+#| fig-cap: Summary of variables by wine quality group.
+#| fig-height: 4
+#| fig-width: 8
+
+py$wine_train_log %>%
+  DescTools::Desc(. ~ quality_gr, data = ., verbose = 3)
+```
+
+</details>
+
+Correlation strength between wine **quality score** and the remaining variables:
+```{python}
+#| label: atbl-corr-quality
+#| tbl-cap: Correlation strength between wine quality score and 
+#|          the remaining variables.
+corr_df_log.query("X=='quality' | Y == 'quality'")
+```
+
+**Results:** 
+
+- Correlation analysis of **quality scores** revealed that the strongest correlation is between `alcohol` and `quality` (r = 0.45 95% CI [0.40, 0.49], p_adj < 0.001) and `volatile_acidity` and `quality` (r = -0.41 95% CI [-0.45, -0.36], p_adj < 0.001).
+- **This means** that correlation strength is moderate so no single variable is enough for  extremely accurate predictions.
+
+
+
+### Wine Quality Distribution
+
+Different wine quality scores come at different rates:
+
+```{python}
+quality_score_counts = wine_train_log.quality.value_counts().sort_index()
+print(test_chi_square_gof(quality_score_counts))
+```
+
+Average quality wines are the most common (error bars show 95 percent confidence intervals):
+
+```{python}
+quality_score_distribution = (
+  ci_proportion_multinomial(quality_score_counts)
+  .reset_index(names="quality_score")
+)
+
+quality_score_distribution
+```
+
+```{r}
+#| warning: true
+ggplot(
+  py$quality_score_distribution,
+  aes(x = factor(quality_score), y = percent)
+) +
+  geom_col(fill = "skyblue3") +
+  geom_errorbar(aes(ymin = ci_lower, ymax = ci_upper), width = 0.3, lwd = 1) +
+  labs(
+    x = "Wine quality score",
+    y = "Percentage",
+    title = "The Distribution of Wines by Quality Scores"
+  )
+```
+
+```{python}
+quality_group_counts = wine_train_log.quality_gr.value_counts().sort_index()
+print(test_chi_square_gof(quality_group_counts))
+```
+
+```{python}
+quality_group_distribution = (
+  ci_proportion_multinomial(quality_group_counts)
+  .reset_index(names="quality_group")
+)
+
+quality_group_distribution
+```
+
+```{r}
+ggplot(
+  py$quality_group_distribution,
+  aes(x = quality_group, y = percent)
+) +
+  geom_col(fill = "skyblue3") +
+  geom_errorbar(aes(ymin = ci_lower, ymax = ci_upper), width = 0.3, lwd = 1) +
+  labs(
+    x = "Wine quality group",
+    y = "Percentage",
+    title = "The Distribution of Wines by Quality Groups"
+  )
+```
+
+
+### Logistic Regression Model
+
+```{python}
+wine_train_log['quality_gr_num'] =  (
+    wine_train_log['quality']
+    .apply(lambda x: to_3_quality_groups(x, numeric=True))
+)
+
+# quality_gr_num=2 is a reference group
+pd.crosstab(wine_train_log['quality_gr_num'], wine_train_log['quality'])
+```
+
+
+Here:
+
+- 0: low quality;
+- 2: medium quality (reference group);
+- 1: high quality.
+
+
+
+: Results of statistical significance based feature selection.
+
+Step | Selected model | Model / Additionally removed variable | Kappa | AIC | Pseudo R²
+---     | :-: | :--------------------------      | :---: | :---:  | :---: 
+(NULL)  | no  |   NULL                           | 0.000 | 1428.6 | 0.000 
+(FULL)  | no  |   FULL                           | 0.327 | 1045.6 | 0.300 
+(1)     | no  |   (FULL) - citric_acid           | 0.339 | 1042.9 | 0.299 
+(2)     | no  |   (1) - density                  | 0.334 | 1043.4 | 0.296 
+(3)     | no  |   (2) - log_fixed_acidity        | 0.329 | 1040.1 | 0.295 
+(4)   | **yes** | (3) - log_total_sulfur_dioxide | 0.334 | 1053.2 | 0.283 
+(5)     | no  |   (4) - log_chlorides            | 0.308 | 1059.3 | 0.276 
+
+Find the details below.
+
+
+<details class="with-border">
+<summary>Multinomial regression (null model) </summary>
+
+```{python}
+#| warning: false
+#| error: false
+formula_mnl_null = ('quality_gr_num ~ 1')
+
+with warnings.catch_warnings():
+    warnings.simplefilter("ignore")
+    _ = do_mnlogit(formula_mnl_null, wine_train_log)
+```
+
+</details>
+
+
+<details class="with-border">
+<summary>Multinomial regression (full model) </summary>
+
+```{python}
+formula_mnl_full = (
+    'quality_gr_num ~ ' +
+    ' + '.join([
+        'log_total_sulfur_dioxide',
+        'log_chlorides',
+        'log_sulphates',
+        'log_residual_sugar',
+        'log_free_sulfur_dioxide',
+        'volatile_acidity',
+        'log_fixed_acidity',
+        'density',
+        'citric_acid',
+        'ph',
+        'alcohol'
+    ])
+  )
+
+_ = do_mnlogit(formula_mnl_full, wine_train_log)
+```
+
+</details>
+
+
+<details class="with-border">
+<summary>Multinomial regression (1) </summary>
+
+```{python}
+# Excluded:
+# - citric_acid 
+formula_mnl_1 = (
+    'quality_gr_num ~ ' + 
+    ' + '.join([
+        'log_total_sulfur_dioxide',
+        'log_chlorides',
+        'log_sulphates',
+        'log_residual_sugar',
+        'log_free_sulfur_dioxide',
+        'volatile_acidity',
+        'log_fixed_acidity',
+        'density',
+        'ph',
+        'alcohol'
+    ])
+  )
+
+_ = do_mnlogit(formula_mnl_1, wine_train_log)
+```
+</details>
+
+
+
+<details class="with-border">
+<summary>Multinomial regression (2) </summary>
+
+```{python}
+# Excluded:
+# - citric_acid 
+# - density
+formula_mnl_2 = (
+    'quality_gr_num ~ ' + 
+    ' + '.join([
+        'log_total_sulfur_dioxide',
+        'log_chlorides',
+        'log_sulphates',
+        'log_residual_sugar',
+        'log_free_sulfur_dioxide',
+        'volatile_acidity',
+        'log_fixed_acidity',
+        'ph',
+        'alcohol'
+    ])
+  )
+
+_ = do_mnlogit(formula_mnl_2, wine_train_log)
+```
+</details>
+
+
+<details class="with-border">
+<summary>Multinomial regression (3) </summary>
+
+```{python}
+# Excluded:
+# - citric_acid 
+# - density
+# - log_fixed_acidity
+formula_mnl_3 = (
+    'quality_gr_num ~ ' + 
+    ' + '.join([
+        'log_total_sulfur_dioxide',
+        'log_chlorides',
+        'log_sulphates',
+        'log_residual_sugar',
+        'log_free_sulfur_dioxide',
+        'volatile_acidity',
+        'ph',
+        'alcohol'
+    ])
+  )
+
+_ = do_mnlogit(formula_mnl_3, wine_train_log)
+```
+
+</details>
+
+
+
+<details class="with-border">
+<summary>Multinomial regression (4) </summary>
+
+```{python}
+# Excluded:
+# - citric_acid 
+# - density
+# - log_fixed_acidity
+# - log_total_sulfur_dioxide
+formula_mnl_4 = (
+    'quality_gr_num ~ ' + 
+    ' + '.join([
+        'log_chlorides',
+        'log_sulphates',
+        'log_residual_sugar',
+        'log_free_sulfur_dioxide',
+        'volatile_acidity',
+        'ph',
+        'alcohol'
+    ])
+  )
+
+classification_model_selected = do_mnlogit(formula_mnl_4, wine_train_log)
+```
+
+</details>
+
+
+
+<details class="with-border">
+<summary>Multinomial regression (5) </summary>
+
+```{python}
+# Excluded:
+# - citric_acid 
+# - density
+# - log_fixed_acidity
+# - log_total_sulfur_dioxide
+# - log_chlorides
+formula_mnl_5 = (
+    'quality_gr_num ~ ' + 
+    ' + '.join([
+        'log_sulphates',
+        'log_residual_sugar',
+        'log_free_sulfur_dioxide',
+        'volatile_acidity',
+        'ph',
+        'alcohol'
+    ])
+  )
+
+_ = do_mnlogit(formula_mnl_5, wine_train_log)
+```
+
+</details>
+
+
+
+
+
+## Modelling Alcohol Content
+
+The **purpose** of this section is to create a **linear regression model** that *predicts the fraction of **alcohol** content in wine.*
+
+Quick pair-wise summary of how other variables relate to the fraction of alcohol content in wine is presented in the details section below. And summary table of correlation between alcohol and other variables is shown below. The correlation analysis was carried out in section "@sec-correlation-all-pairs".
+
+<details class="with-border">
+<summary>Details: plots and summaries of variables by alcohol content</summary>
+
+Let's investigate relationship between alcohol content and other variables.
+
+
+```{r paged.print=FALSE, fig.height=4, fig.width=8}
+#| code-summary: "R code"
+#| label: afig-desc-pairs-alcohol
+#| fig-height: 4
+#| fig-width: 8
+#| warning: false
+
+py$wine_train_log %>%
+  mutate(quality = ordered(quality)) %>%
+  DescTools::Desc(. ~ alcohol, data = ., verbose = 3)
+```
+
+</details>
+
+
+Correlation strength between **alcohol concentration** and the remaining variables:
+```{python}
+#| label: atbl-corr-log-alcohol
+#| tbl-cap: Correlation strength between alcohol concentration and 
+#|          the remaining variables.
+corr_df_log.query("X=='alcohol' | Y == 'alcohol'")
+```
+
+**Results:** 
+
+- Correlation analysis of **alcohol** content revealed that the strongest correlation is between `density` and `alcohol` (r = -0.49, 95% CI [-0.53, -0.45], p_adj < 0.001) as well as between `alcohol` and `quality` (r = 0.45 95% CI [0.40, 0.49], p_adj < 0.001).
+- **This means** that correlation strength is moderate so no single variable is enough for  extremely accurate predictions.
+
+
+
+
+### Sequential Feature Selection: All Features
+
+Let's do sequential feature selection and investigate how many features might be enough.
+
+
+```{python}
+# For data without transformation
+formula_full = (
+    'alcohol ~ ' + 
+    ' + '.join([
+        'total_sulfur_dioxide',
+        'chlorides',
+        'sulphates',
+        'residual_sugar',
+        'free_sulfur_dioxide',
+        'volatile_acidity',
+        'fixed_acidity',
+        'density',
+        'citric_acid',
+        'ph',
+        'quality'
+    ])
+  )
+```
+
+```{python}
+# For log-transformed data
+formula_log_full = (
+    'alcohol ~ ' + 
+    ' + '.join([
+        'log_total_sulfur_dioxide',
+        'log_chlorides',
+        'log_sulphates',
+        'log_residual_sugar',
+        'log_free_sulfur_dioxide',
+        'volatile_acidity',
+        'log_fixed_acidity',
+        'density',
+        'citric_acid',
+        'ph',
+        'quality'
+    ])
+  )
+```
+
+<details class="with-border">
+<summary>SFS results</summary>
+
+```{python}
+np.random.seed(251)
+sfs_res1 = do_sfs_lin_reg(formula_full, wine_train)
+show_sfs_results_lin_reg(sfs_res1, "(All Variables on Original Scale)");
+```
+</details>
+
+<details class="with-border">
+<summary>SFS results</summary>
+```{python}
+np.random.seed(251)
+sfs_res2 = do_sfs_lin_reg(formula_full, wine_train, False)
+show_sfs_results_lin_reg(sfs_res2, "(All Variables on Original Scale)");
+```
+</details>
+
+
+<details class="with-border">
+<summary>SFS results</summary>
+```{python}
+np.random.seed(251)
+sfs_res3 = do_sfs_lin_reg(formula_log_full, wine_train_log)
+show_sfs_results_lin_reg(sfs_res3, "(Log-Transformed Variables Included)");
+```
+</details>
+
+<details open class="with-border">
+<summary>SFS results</summary>
+```{python}
+sfs_res4 = do_sfs_lin_reg(formula_log_full, wine_train_log, False)
+show_sfs_results_lin_reg(sfs_res4, "(Log-Transformed Variables Included)");
+```
+</details>
+
+
+Despite the fact that algorithm suggests more, but 5-6 variables would be enough as additional features give just a slight improvement.
+Log-transformed features give a slightly better performance than the features on the original scale.
+
+```{python}
+n_features = 6
+```
+
+
+
+<details class="with-border">
+<summary>List selected features and regression performance</summary>
+
+```{python include=FALSE}
+sfs_res4.get_metric_dict()[1].keys()
+```
+
+```{python}
+print("All features on original scale")
+get_sfs_performance_lin_reg(sfs_res2, n_features)
+```
+
+```{python}
+sfs_res2.get_metric_dict()[n_features]['feature_names']
+```
+
+***
+
+```{python}
+print("With log-transformed features")
+get_sfs_performance_lin_reg(sfs_res4, n_features)
+```
+
+</details>
+
+```{python}
+formula_selected_6 = sfs_res4.get_metric_dict()[n_features]['feature_names']
+formula_selected_6
+```
+
+```{python}
+formula_selected_6 = "alcohol ~ " + " + ".join(formula_selected_6)
+```
+
+
+### Sequential Feature Selection: No Quality
+
+Quality score seems to be the most expensive feature and might be not available at prediction time. So let's remove it from options to select features.
+
+```{python}
+# Formulas that exclude "quality"
+formula_q = formula_full.replace(" + quality", "")
+formula_log_q = formula_log_full.replace(" + quality", "")
+```
+
+<details class="with-border">
+<summary>SFS results</summary>
+
+```{python}
+np.random.seed(251)
+sfs_res1q = do_sfs_lin_reg(formula_q, wine_train)
+show_sfs_results_lin_reg(sfs_res1q, "(All Variables on Original Scale)");
+```
+</details>
+
+
+<details class="with-border">
+<summary>SFS results</summary>
+```{python}
+np.random.seed(251)
+sfs_res2q = do_sfs_lin_reg(formula_q, wine_train, False)
+show_sfs_results_lin_reg(sfs_res2q, "(All Variables on Original Scale)");
+```
+</details>
+
+
+<details class="with-border">
+<summary>SFS results</summary>
+```{python}
+np.random.seed(251)
+sfs_res3q = do_sfs_lin_reg(formula_log_q, wine_train_log)
+show_sfs_results_lin_reg(sfs_res3q, "(Log-Transformed Variables Included)");
+```
+</details>
+
+
+<details open class="with-border">
+<summary>SFS results</summary>
+```{python}
+sfs_res4q = do_sfs_lin_reg(formula_log_q, wine_train_log, False)
+show_sfs_results_lin_reg(sfs_res4q, "(Log-Transformed Variables Included)");
+```
+</details>
+
+
+Despite the fact that the algorithm suggests using more features, it seems that 5 features would be enough as additional features give just a slight improvement.
+Again, log-transformed features give a slightly better performance than the features on the original scale.
+
+```{python}
+n_features_q = 5
+```
+
+<details class="with-border">
+<summary>List selected features and regression performance</summary>
+
+```{python}
+print("All features on original scale")
+get_sfs_performance_lin_reg(sfs_res2q, n_features_q)
+```
+
+```{python}
+sfs_res2q.get_metric_dict()[n_features_q]['feature_names']
+```
+
+
+
+```{python}
+print("With log-transformed features")
+get_sfs_performance_lin_reg(sfs_res4q, n_features_q)
+```
+</details>
+
+
+```{python}
+formula_selected_5 = sfs_res4q.get_metric_dict()[n_features_q]['feature_names']
+formula_selected_5
+```
+
+```{python}
+formula_selected_5 = "alcohol ~ " + " + ".join(formula_selected_5)
+```
+
+
+
+### Compare Null, Full and Selected Models
+
+
+: Comparison of null, full and 2 selected models to predict alcohol contents.
+
+Model         | R²    | AIC
+---------     | :---: | :---:
+ Null         | 0.000 | 3779
+ Full         | 0.703 | 2250
+ 6 predictors | 0.692 | 2284
+ 5 predictors | 0.679 | 2336
+
+
+<details class="with-border">
+<summary>Alcohol prediction: null model</summary>
+
+```{python}
+formula_null = 'alcohol ~ 1'
+
+model_null = smf.ols(formula_null, wine_train_log)
+regression_model_null = model_null.fit()
+print(f"R² = {regression_model_null.rsquared:.3f}")
+print(regression_model_null.summary())
+```
+
+</details>
+
+
+<details class="with-border">
+<summary>Alcohol prediction: full model</summary>
+
+```{python}
+model_full = smf.ols(formula_log_full, wine_train_log)
+regression_model_full = model_full.fit()
+print(f"R² = {regression_model_full.rsquared:.3f}")
+print(regression_model_full.summary())
+```
+
+</details>
+
+
+<details class="with-border">
+<summary>Alcohol prediction: 6-predictor model</summary>
+
+Model with 6 selected variables (including quality score):
+
+```{python}
+model_6 = smf.ols(formula_selected_6, wine_train_log)
+regression_model_6 = model_6.fit()
+print(f"R² = {regression_model_6.rsquared:.3f}")
+print(regression_model_6.summary())
+```
+
+</details>
+
+
+
+<details class="with-border">
+<summary>Alcohol prediction: null model</summary>
+
+Model with 5 selected variables (without quality score):
+
+```{python}
+model_5 = smf.ols(formula_selected_5, wine_train_log)
+regression_model_5 = model_5.fit()
+print(f"R² = {regression_model_5.rsquared:.3f}")
+print(regression_model_5.summary())
+```
+
+</details>
+
+
+
+### Model Diagnostics and Feature Importance
+
+Create mean center and standard deviation scaled data for feature importance analysis.
+
+```{python}
+wine_train_log_num = wine_train_log.select_dtypes(include="number")
+
+scaler_log = StandardScaler().fit(wine_train_log_num)
+wine_train_log_scaled = scaler_log.transform(wine_train_log_num)
+wine_train_log_scaled = (
+    pd.DataFrame(wine_train_log_scaled, columns=wine_train_log_num.columns)
+)
+```
+
+
+Feature importance in the model with 6 selected variables:
+
+```{python}
+model_6_scaled = smf.ols(formula_selected_6, wine_train_log_scaled)
+regression_model_6_scaled = model_6_scaled.fit()
+diagnostics_6_scaled = Linear_Reg_Diagnostic(regression_model_6_scaled)
+(
+    pd.concat([
+        diagnostics_6_scaled.vif_table().set_index("Features"), 
+        regression_model_6_scaled.params.rename("standardized_coefficients")
+        ], axis=1)
+        .sort_values("standardized_coefficients", key=abs, ascending=False)
+)
+```
+
+**Quality** is the **least important** feature in this set while **density** is the **most important**.
+VIF value  for `log_fixed_acidity` is 4.05. 
+Some authors claim that VIF > 4 indicate multicollinearity. 
+Other sources suggest VIF > 5 to indicate multicollinearity.
+
+
+
+Feature importance in the model with 5 selected variables (without quality score):
+
+```{python}
+model_5_scaled = smf.ols(formula_selected_5, wine_train_log_scaled)
+regression_model_5_scaled = model_5_scaled.fit()
+diagnostics_5_scaled = Linear_Reg_Diagnostic(regression_model_5_scaled)
+(
+    pd.concat([
+        diagnostics_5_scaled.vif_table().set_index("Features"), 
+        regression_model_5_scaled.params.rename("standardized_coefficients")
+        ], axis=1)
+        .sort_values("standardized_coefficients", key=abs, ascending=False)
+)
+```
+
+Again, `density` is the most important feature. And no multicollinearity here as all VIF < 4.
+
+
+**Important.**  
+
+In models with 5 and 6 features, R² is respectively 0.679 and 0.692.
+The difference is small and the 6-th variable quality least important.
+Looking from the practical point of view, quality score is the most subjective and hardest to get feature as a trained expert is required and the result may differ from expert to expert.
+So **the model with 5 variables is selected as the final model.**
+
+
+Now let's do some model diagnostics by analyzing model residuals.
+
+
+```{python}
+diagnostics_5 = Linear_Reg_Diagnostic(regression_model_5)
+```
+
+Distribution of residuals:
+
+```{python}
+plt.clf()
+ax = regression_model_5.resid.plot.density();
+ax.set_xlabel("Residuals");
+plt.axvline(x = 0, color = 'darkred')
+plt.show()
+```
+It seems that residuals are slightly skewed and their mean shifted to the side of negative values but the shift is insignificant (see results below).
+
+Do some formal assumption checking:
+
+
+- Is mean of residuals equal to 0? 
+```{python}
+_, p_ttest = ttest_1samp(regression_model_5.resid, 0)
+print(f"t test that mean = 0, p: {format_p0(p_ttest)}")
+```
+
+- Are residuals normally distributed?
+
+```{python}
+pg.normality(regression_model_5.resid)
+```
+
+- Are residuals homoscedastic?
+
+```{python}
+_, p_bp, _, _ = sms.het_breuschpagan(regression_model_5.resid, regression_model_5.model.exog)
+print(f"Breusch-Pagan test for heteroscedasticity, p: {format_p0(p_bp)}")
+```
+- are there any outliers?
+
+```{python}
+(regression_model_5.get_influence().cooks_distance[0] > 1).any()
+```
+Let's look to the plots of residuals.
+
+```{python, fig.width=8, fig.height=8}
+#| fig-width: 8
+#| fig-height: 8
+#| results: hide
+#| message: false
+#| warning: false
+diagnostics_5();
+```
+
+The analysis of residuals revealed **no outliers** and the assumption that mean of residuals equals to 0 is met. But it seems that normality and homoscedasticity **assumptions are at least slightly violated**.
+
+(Slightly) violated normality and homoscedasticity assumptions may have influence on formal inference about linear models, e.g., may lead to too large confidence intervals. To cope with heteroscedasticity, more robust heteroskedasticity-consistent (HC) estimators may be used. On the other hand, these violations should not have much influence on prediction accuracy.
+
+
+## Test Final Models
+
+### Preprocess Test Set
+
+Pre-processing of test data is presented there to clarify, which are the most important pre-processing steps.
+
+```{python}
+wine_test = wine_test.clean_names()
+
+skewed_vars = ['chlorides', 'residual_sugar', 'sulphates', 
+               'total_sulfur_dioxide', 'free_sulfur_dioxide',
+               'fixed_acidity']
+
+new_names_map = {i:"log_" + str(i) for i in skewed_vars}
+
+wine_test_log = (
+    wine_test
+    .transform_columns(skewed_vars, np.log10)
+    .rename(new_names_map, axis=1)
+)
+
+wine_test_log['quality_gr_num'] = (
+    wine_test_log['quality']
+    .apply(lambda x: to_3_quality_groups(x, numeric=True))
+)
+```
+
+
+### Alcohol Content Prediction
+
+Linear Regression Model to predict alcohol content.
+
+In test set, RMSE is slightly higher, which is expected.
+R² score is the same (R² = 0.68).
+This result show that model **generalizes quite well**.
+We can interpret, that on average, true value will differ by 0.617 % vol. from the true value of alcohol content.
+
+```{python}
+y_train_true = wine_train_log.alcohol
+y_train_pred = regression_model_5.predict(wine_train_log)
+
+y_test_true = wine_test_log.alcohol
+y_test_pred = regression_model_5.predict(wine_test_log)
+
+pd.concat([
+    get_regression_performance(y_train_true, y_train_pred, "training"),
+    get_regression_performance(y_test_true, y_test_pred, "test")
+])
+```
+
+
+### Wine Quality Class Prediction
+
+The performance of Multinomial Logistic Regression model that predicts wine quality in training set is kappa = 0.334, in test set kappa = 0.333. The difference is negligible, but performance is poor.
+Prediction value (precision) in test set for *high quality* wines is 0.71, for *medium quality group* is 0.86, but none of *low quality* wines was predicted correctly.
+This shows that the selected model is **not suitable** for this class identification. The reasons might be class imbalance and here techniques like regularization or other type of model (e.g., tree-based model) might help to achieve better performance. A more advanced feature engineering might also be helpful (e.g., merging "low" and "medium" classes).
+
+
+
+**Training set:**
+
+```{python}
+true_train = wine_train_log['quality_gr_num']
+pred_train = predict_class_mnlogit(classification_model_selected, wine_train_log)
+print_classification_report(true_train, pred_train)
+```
+
+**Test set:**
+
+```{python}
+true_test = wine_test_log['quality_gr_num']
+pred_test = predict_class_mnlogit(classification_model_selected, wine_test_log)
+
+with warnings.catch_warnings():
+    warnings.simplefilter("ignore")
+    print_classification_report(true_test, pred_test)
+```
+
+# Conclusions
+
+Alcohol contents prediction:
+
+- Linear regression model to predict alcohol content was created.
+- The performance of the model is R² = 0.68, RMSE = 0.617.
+- Predictor variables in descending order by importance:
+density, fixed acidity, pH, residual sugar, and sulphates.
+- Some linear model assumptions were violated so further statistical inference (e.g., calculation of confidence intervals) was not performed.
+- After logarithmic transformation of right-skewed variables, model showed better performance.
+
+
+Wine quality class prediction:
+
+- Multinomial logistic regression model to identify low, medium and high quality wines was created.
+- Predictor variables are chlorides, sulphates, residual sugar, free sulfur dioxide, volatile acidity, pH, and alcohol.
+- Overall performance of the model is not good: kappa (test set) = 0.333. 
+- Predictive value (precision) for *high quality* wines is 0.71, for *medium quality group* is 0.86. Unfortunately, none of *low quality* wines was predicted correctly. This suggest that there is a room for model improvement (e.g., cope with class imbalance or use another type wine quality grouping) which can be the scope of the future studies.
+
+
+
+# Looker Studio Dashboard
+
+A part of this project was to create Looker Studio dashboard. A dashboard to explore some properties of red wine were introduced. You can find a print screen of the dashboard and a link to it below.
+
+
+![](fig/wine-dashboard.png)
+
+[Link](https://lookerstudio.google.com/reporting/1413c256-c42a-4b0d-976e-ac2b878fbcf9/page/dFTED){target="_blank"} to the dashboard.
+
+
+# Limitations and Suggestions on Improvement
+
+
+- Class-imbalance in classification task should be addressed better (by using regularization, non-linear models, etc.).
+- More feature engineering can be introduced into analysis (e.g., merging "low" and "medium" wine quality groups).
+- In PCA, table or plot with feature contribution score could be added.
+- For `.qmd` files, there is no Python code linter and formatter yet (or I'm not aware of one). So there might be style issues left. On the other hand, Quarto enforces leaving no critical code issues as otherwise HTML output is not created.
+- Results in different sections should be presented in a more consistent manner.
+- More detailed written explanations could be added to some sections (e.g., to the section on PCA).
+- If thinking about production pipelines, it would be easier to maintain code if it would be written in a single language (either R or Python). Bilingual code requires an expert, who knows both languages.
