@@ -9,9 +9,6 @@ https://gegznav.github.io/ds-projects/travel-insurance
 Contents of this directory
 ---------------------------
 
-`315.ipynb`  
-File with project description.
-
 `index.html`  
 Rendered report of the analysis. Also available via the link provided above.  
 **This is the main file in this project**, but GitHub may not display it correctly.
