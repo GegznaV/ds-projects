@@ -1,0 +1,18 @@
+div[data-code-filename] summary {
+  margin-bottom: 0;
+  padding-bottom: 2px;
+  padding-top: 2px;
+  border-radius: var(--quarto-border-radius);
+  border-bottom: 0;
+}
+
+div[data-code-filename] details[open] summary {
+  color: #6c757d;
+  border-bottom-left-radius: 0%;
+  border-bottom-right-radius: 0%;
+}
+
+div[data-code-filename] details div.sourceCode {
+  border-radius: 0%;
+  margin-top: 0;
+}
