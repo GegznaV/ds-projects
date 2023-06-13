@@ -20,6 +20,11 @@ Data analysis:
     - Main tools: Python, SQL | 
     [Repository](https://github.com/GegznaV/ds-projects/tree/main/european-football) | 
     [HTML report](https://gegznav.github.io/ds-projects/european-football) 
+    
+4. **Travel Insurance Claim Prediction** (data analysis project)
+    - Main tools: Python | 
+    [Repository](https://github.com/GegznaV/ds-projects/tree/main/travel-insurance) | 
+    [HTML report](https://gegznav.github.io/ds-projects/travel-insurance) 
 
 
 
