@@ -31,6 +31,9 @@ Directory for data (may be not visible on GitHub).
 `functions`  
 Directory for data analysis functions, methods and classes.
 
+`img`  
+Directory for images and pictures.
+
 `.saved-results`  
 Directory for cached data analysis results (may be not visible on GitHub).
 
