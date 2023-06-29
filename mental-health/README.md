@@ -1,19 +1,37 @@
-Project "Mental Health in Tech Industry"
-========================================
+The Analysis of Mental Health in Tech Industry
+===============================================
 
-This folder contains "Mental Health in Tech Industry" data analysis project by Vilmantas Gėgžna.
+This folder contains "Mental Health in Tech Industry" **data analysis project** by Vilmantas Gėgžna.
+The report of this data analysis project is available at:  
+https://gegznav.github.io/ds-projects/mental-health   
+**You should study the report available via this link!** 
 
-The main files and directories:
+![Mental Health Tech Logo](img/logo-mini.png)
 
-- `index.html`: the rendered data analysis report (the main file). View it at:
-    - https://gegznav.github.io/ds-projects/mental-health
 
-- `mental-health.ipynb`: the source of data analysis report (Jupyter notebook). 
+Contents of this directory
+---------------------------
 
-- `functions.py`: custom Python functions.
+`index.html`  
+Rendered report of the analysis. View it via the link provided above.  
+**This is the main file in this project**.
 
-- `data`: directory with SQLite database and link to its source website.
+`mental-health.ipynb`  
+The source code of the data analysis (Jupyter notebook).
 
-- Supplementary files:
-    - `supplement-a--template.ipynb`: Jupyter notebook with the code to investigate each question from the database and the answers to that question.
-    - `supplement-b--common-questions.ipynb`: The code that lists the questions, which are common among several surveys stored within the database. 
+`functions.py`  
+Custom Python functions.
+
+`data`  
+Directory for data. It contains SQLite database and link to its source website.
+
+`img`  
+Directory for images and pictures.
+
+`.gitignore`  
+Utility file for Git.
+
+Supplementary files:
+
+- `supplement-a--template.ipynb`: Jupyter notebook with the code to investigate each question from the database and the answers to that question.
+- `supplement-b--common-questions.ipynb`: The code that lists the questions, which are common among several surveys stored within the database. 
