@@ -1,13 +1,30 @@
 The Analysis of Mental Health in Tech Industry
 ===============================================
 
-This directory contains **data analysis project** by Vilmantas Gėgžna.
-The report of the project is available at:  
-https://gegznav.github.io/ds-projects/mental-health   
-**You should study the report available via this link!** 
+This directory contains **data analysis project** by Vilmantas Gėgžna.  
+**You should study the rendered report available via [this link](https://gegznav.github.io/ds-projects/mental-health)!** 
+
+Annotation
+----------
 
 ![Mental Health Tech Logo](img/logo-mini.png)
 
+Various mental disorders is a **widely spread** phenomenon: approximately **1 in 5 adults** (21%, 52.9 million people) in the US experienced mental illness in 2020[^1] and up to 1 billion people across the globe suffer from various mental disorders.
+**Loss in productivity** due to anxiety and depression — two most common conditions — alone **costs 1 trillion US dollars** annually worldwide[^2]. 
+Still, not enough attention is payed to mental health and not enough health care resources are assigned to improve the situation.
+As one of the solutions in the US, Open Sourcing Mental Health a non-profit corporation was found in 2013.
+The purpose it is to raise awareness, educate, and provide resources to support mental wellness in the tech and open source communities[^3].
+Since 2014, the corporation organizes surveys to investigate and understand status of mental health as well as attitudes towards mental health and frequency of mental health disorders in the tech industry.
+This project is dedicated to the analysis of these surveys' data, acquired in 2014-2019. 
+
+
+<div style="font-size:14px">
+
+[^1]: National Alliance of Mental Illness. URL: <https://www.nami.org/mhstats> (updated on June 2022) 
+[^2]: Mental health matters. The Lancet Global Health, 2020. URL: <https://www.thelancet.com/journals/langlo/article/PIIS2214-109X(20)30432-0/fulltext>, DOI: <https://doi.org/10.1016/S2214-109X(20)30432-0> 
+[^3]: Open Sourcing Mental Health (OSMI) website. URL: <https://osmihelp.org/about/about-osmi> (visited on 2022-11-15) 
+
+</div>
 
 Contents of this directory
 ---------------------------
@@ -23,7 +40,7 @@ Source code of the data analysis (Jupyter notebook).
 Custom Python functions.
 
 - `data`:
-Directory for data. It contains SQLite database and link to its source website.
+Directory for data. It contains SQLite database and the link to its source website.
 
 - `img`:
 Directory for images and pictures.
@@ -32,5 +49,7 @@ Directory for images and pictures.
 Utility file for Git.
 
 - Supplementary files:
-    - `supplement-a--template.ipynb`: Jupyter notebook with the code to investigate each question from the database and the answers to that question.
-    - `supplement-b--common-questions.ipynb`: The code that lists the questions, which are common among several surveys stored within the database. 
+    - `supplement-a--template.ipynb`:
+    Jupyter notebook with the code to investigate each question from the database and the answers to that question.
+    - `supplement-b--common-questions.ipynb`:
+    Jupyter notebook with the code that lists the questions, which are common among several surveys stored within the database. 
