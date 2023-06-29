@@ -1,13 +1,16 @@
 The Analysis of Mental Health in Tech Industry
 ===============================================
 
+
 This directory contains **data analysis project** by Vilmantas Gėgžna.  
 **You should study the rendered report available via [this link](https://gegznav.github.io/ds-projects/mental-health)!** 
 
+<p align="center">
+  <img src="img/logo-mini.png">
+</p>
+
 Annotation
 ----------
-
-![Mental Health Tech Logo](img/logo-mini.png)
 
 Various mental disorders is a **widely spread** phenomenon: approximately **1 in 5 adults** (21%, 52.9 million people) in the US experienced mental illness in 2020[^1] and up to 1 billion people across the globe suffer from various mental disorders.
 **Loss in productivity** due to anxiety and depression — two most common conditions — alone **costs 1 trillion US dollars** annually worldwide[^2]. 
