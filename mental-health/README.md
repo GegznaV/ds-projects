@@ -15,5 +15,5 @@ The main files and directories:
 - `data`: directory with SQLite database and link to its source website.
 
 - Supplementary files:
-    - `supplement-a--template.ipynb`: Jupyter notebook with code to investigate each question and the answers  to that question.
-    - `supplement-b--common-questions.ipynb`: A code that lists the questions that are common in several surveys that are present tin the database. 
+    - `supplement-a--template.ipynb`: Jupyter notebook with the code to investigate each question from the database and the answers to that question.
+    - `supplement-b--common-questions.ipynb`: The code that lists the questions, which are common among several surveys stored within the database. 
