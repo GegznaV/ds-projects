@@ -12,15 +12,13 @@ The Analysis of Mental Health in Tech Industry
   </td> 
   <td width="80%" align="center">
   
-  This directory contains **data analysis project** by [Vilmantas Gėgžna](https://github.com/GegznaV).  
-**You should study the rendered report available via [this link](https://gegznav.github.io/ds-projects/mental-health)!** 
+  This directory contains a **data analysis project** by [Vilmantas Gėgžna](https://github.com/GegznaV).  
+You should **study the report** available **via this link:**  
+https://gegznav.github.io/ds-projects/mental-health
 
   </td>
   </tr>
 </table>
-
-
-
 
 Annotation
 ----------
@@ -46,14 +44,11 @@ Contents of This Directory
 ---------------------------
 
 - `index.html`:
-Rendered report of the analysis. View it via the link provided above.  
-**This is the main file of this project**.
+Rendered report of the analysis **(the main file of this project)**.  
+View it via the link provided above.
 
 - `mental-health.ipynb`:
 Source code of the data analysis (Jupyter notebook).
-
-- `functions.py`:
-Custom Python functions.
 
 - `data`:
 Directory for data. It contains SQLite database and the link to its source website.
@@ -61,13 +56,17 @@ Directory for data. It contains SQLite database and the link to its source websi
 - `img`:
 Directory for images and pictures.
 
-- `requirements.txt`:
-List of Python packages required to run the code.
-
 - `.gitignore`:
 Utility file for Git.
 
-- Supplementary files:
+- `functions.py`:
+File with custom Python functions.
+
+- `requirements.txt`: 
+File with a list of Python packages required for this project.
+
+
+- Supplementary analysis files:
     - `supplement-a--template.ipynb`:
     Jupyter notebook with the code to investigate each question from the database and the answers to that question.
     - `supplement-b--common-questions.ipynb`:
