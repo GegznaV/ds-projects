@@ -22,8 +22,6 @@ The Analysis of Mental Health in Tech Industry
 
 
 
-
-
 Annotation
 ----------
 
@@ -63,6 +61,9 @@ Directory for data. It contains SQLite database and the link to its source websi
 - `img`:
 Directory for images and pictures.
 
+- `requirements.txt`:
+List of Python packages required to run the code.
+
 - `.gitignore`:
 Utility file for Git.
 
@@ -71,3 +72,26 @@ Utility file for Git.
     Jupyter notebook with the code to investigate each question from the database and the answers to that question.
     - `supplement-b--common-questions.ipynb`:
     Jupyter notebook with the code that lists the questions, which are common among several surveys stored within the database. 
+
+
+Install Requirements
+--------------------
+
+To run the analysis, it is recommended to create a separate virtual environment (e.g., `proj-mental-health`) and install the required Python packages there.
+Assuming that [Anaconda](https://www.anaconda.com/download) is installed, this can be accomplished by running the following commands in the terminal:
+
+```bash
+conda create -n proj-mental-health python=3.11
+conda activate proj-mental-health
+pip install -r requirements.txt
+```
+
+
+Create HTML Report
+------------------
+
+To create the HTML report, install [Quarto](https://quarto.org/docs/download/) (version 1.4 or newer is recommended) and run the following command in the terminal:
+
+```bash
+quarto render mental-health.ipynb --to html --output index.html
+```
