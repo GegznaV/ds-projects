@@ -2991,13 +2991,13 @@ vertical-align: -.125em;
   <li><a href="#abbreviations" id="toc-abbreviations" class="nav-link active" data-scroll-target="#abbreviations">Abbreviations</a></li>
   <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction"><span class="header-section-number">1</span> Introduction</a></li>
   <li><a href="#overview-and-inspection" id="toc-overview-and-inspection" class="nav-link" data-scroll-target="#overview-and-inspection"><span class="header-section-number">2</span> Overview and Inspection</a>
-  <ul class="collapse">
+  <ul>
   <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup"><span class="header-section-number">2.1</span> Setup</a></li>
   <li><a href="#inspection-of-tables-in-database" id="toc-inspection-of-tables-in-database" class="nav-link" data-scroll-target="#inspection-of-tables-in-database"><span class="header-section-number">2.2</span> Inspection of Tables in Database</a></li>
   <li><a href="#inspection-of-questionnaires" id="toc-inspection-of-questionnaires" class="nav-link" data-scroll-target="#inspection-of-questionnaires"><span class="header-section-number">2.3</span> Inspection of Questionnaires</a></li>
   </ul></li>
   <li><a href="#pre-processing-and-exploratory-data-analysis" id="toc-pre-processing-and-exploratory-data-analysis" class="nav-link" data-scroll-target="#pre-processing-and-exploratory-data-analysis"><span class="header-section-number">3</span> Pre-Processing and Exploratory Data Analysis</a>
-  <ul class="collapse">
+  <ul>
   <li><a href="#pre-processing" id="toc-pre-processing" class="nav-link" data-scroll-target="#pre-processing"><span class="header-section-number">3.1</span> Pre-Processing</a></li>
   <li><a href="#activity-of-respondents" id="toc-activity-of-respondents" class="nav-link" data-scroll-target="#activity-of-respondents"><span class="header-section-number">3.2</span> Activity of Respondents</a></li>
   <li><a href="#respondents-profile" id="toc-respondents-profile" class="nav-link" data-scroll-target="#respondents-profile"><span class="header-section-number">3.3</span> Respondent’s Profile</a>
@@ -3007,7 +3007,7 @@ vertical-align: -.125em;
   </ul></li>
   </ul></li>
   <li><a href="#take-away-points" id="toc-take-away-points" class="nav-link" data-scroll-target="#take-away-points"><span class="header-section-number">4</span> Take Away Points</a>
-  <ul class="collapse">
+  <ul>
   <li><a href="#suggestions-to-improve-the-analysis" id="toc-suggestions-to-improve-the-analysis" class="nav-link" data-scroll-target="#suggestions-to-improve-the-analysis">Suggestions to Improve the Analysis</a></li>
   </ul></li>
   </ul>
@@ -7099,7 +7099,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
+      var filterRegex = new RegExp(".*ds-project.*");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href);
     }
