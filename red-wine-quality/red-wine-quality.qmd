@@ -2661,7 +2661,7 @@ Wine quality class prediction:
 A part of this project was to create Looker Studio dashboard. A dashboard to explore some properties of red wine were introduced. You can find a print screen of the dashboard and a link to it below.
 
 
-![](fig/wine-dashboard.png)
+![](img/wine-dashboard.png)
 
 [Link](https://lookerstudio.google.com/reporting/1413c256-c42a-4b0d-976e-ac2b878fbcf9/page/dFTED){target="_blank"} to the dashboard.
 
