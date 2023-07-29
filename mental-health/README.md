@@ -65,12 +65,17 @@ File with custom Python functions.
 - `requirements.txt`: 
 File with a list of Python packages required for this project.
 
-
 - Supplementary analysis files:
     - `supplement-a--template.ipynb`:
     Jupyter notebook with the code to investigate each question from the database and the answers to that question.
     - `supplement-b--common-questions.ipynb`:
     Jupyter notebook with the code that lists the questions, which are common among several surveys stored within the database. 
+
+
+Working Directory
+-----------------
+
+The working directory must be the root directory of this project (i.e., the directory containing the `mental-health.ipynb` file).
 
 
 Install Requirements
