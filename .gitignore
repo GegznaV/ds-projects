@@ -4,6 +4,5 @@ desktop.ini
 .Rhistory
 tmp--*
 
-apple-podcasts
-
-README.html
+*.html
+!index.html
