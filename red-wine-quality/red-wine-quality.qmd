@@ -1,29 +1,34 @@
 ---
 pagetitle: "DA-3-proj | VG"
-title:     "Red Wine Quality"
+title:     "Red Wine Quality Prediction"
 subtitle:  "Data Analysis Project"
 author:    "Vilmantas Gėgžna"
 date: 2023-02-07
 date-modified: today
 date-format: iso
+language:
+  title-block-modified: "Updated"
 fig-width: 6
 fig-height: 3.5
-fig-align: "center"
+fig-align: center
 results: hold
 format:
   html:
     embed-resources: true
-    results: hold
     toc: true
     toc_float: true
     toc-location: left
+    toc-depth: 4
     number-sections: true
-    df-print: paged
-    link-external-newwindow: true
-    link-external-icon: true
+    number-depth: 3
     code-tools: true
     code-fold: show # possible options: false, true, show
     code-summary: "Python code"
+    df-print: paged
+    link-external-newwindow: true
+    link-external-icon: true
+    link-external-filter: "gegznav.github.io|mokymai.github.io|.*ds-project.*"
+
     include-after-body: # To bold "Fig" and "Table" in captions.
       text: |
         <script>
@@ -37,16 +42,19 @@ format:
         });
         </script>
 bibliography: assets/references.bib
-filters:
-  - black-formatter
-# VS Code:
-editor:
-    render-on-save: false
-# RStudio:
-editor_options:
+crossref:
+  chapters: true
+  fig-title: 'Fig.'    # (default is "Figure")
+  tbl-title: Table     # (default is "Table")
+  title-delim: .       # (default is ":")
+editor: # VS Code
+  render-on-save: false
+editor_options: # RStudio
   chunk_output_type: inline
   markdown:
     extensions: -smart
+filters:
+  - black-formatter
 ---
 
 
@@ -89,13 +97,20 @@ details[open].with-border {
 ***Helper tools:*** Quarto, RStudio, Git  
 ***Skills:***
 
-- statistical programming,
-- data pre-processing,
-- descriptive statistics and data visualization, EDA,
-- inferential statistics: hypothesis testing and confidence intervals,
-- statistical modelling: linear and logistic regression,
-- dashboarding,
-- literate programming.
+- data pre-processing
+- exploratory data analysis (**EDA**):
+    - descriptive statistics
+    - data visualization
+    - **exploratory PCA** (principal component analysis)
+- inferential statistics: 
+    - hypothesis testing
+    - confidence intervals
+- statistical modelling: 
+    - **linear regression**
+    - **logistic regression**
+- literate programming
+- statistical programming
+- dashboarding
 
 
 # Abbreviations {.unnumbered}
