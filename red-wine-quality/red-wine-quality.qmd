@@ -58,7 +58,7 @@ filters:
 ---
 
 
-```{css, echo=FALSE}
+```{css, echo=FALSE, eval=TRUE}
 #title-block-header.quarto-title-block.default .quarto-title-meta {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -92,6 +92,14 @@ details[open].with-border {
   border-radius: 5px;
 }
 ```
+
+<center>
+
+![Project logo. Generated with [Leonardo.Ai](https://leonardo.ai/).](img/logo-red-wine-proj (leonardo.Ai).jpg){max-width=100%, width=400px}
+
+</center>
+
+
 
 ***Data analysis tools:*** Python, R, Looker Studio     
 ***Helper tools:*** Quarto, RStudio, Git  
