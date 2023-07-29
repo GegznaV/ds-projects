@@ -9,22 +9,31 @@ Data analysis:
 1. **Mental Health in Tech Industry** (data analysis project)
     - Main tools: Python, SQL | 
     [Repository](https://github.com/GegznaV/ds-projects/tree/main/mental-health) | 
-    [HTML report](https://gegznav.github.io/ds-projects/mental-health/) 
+    [HTML report](https://gegznav.github.io/ds-projects/mental-health/)
+    - Highlights: categorical data analysis
 
-2. **Red Wine Quality** (data analysis project)
+2. **The Analysis of *Apple Podcasts* Reviews** (data analysis project)
+    - Main tools: R, Python | 
+    [Repository](https://github.com/GegznaV/ds-projects/tree/main/apple-podcasts) | 
+    [HTML report](https://gegznav.github.io/ds-projects/apple-podcasts/)
+    - Highlights: inferential statistics
+
+3. **Red Wine Quality** (data analysis project)
     - Main tools: R, Python | 
     [Repository](https://github.com/GegznaV/ds-projects/tree/main/red-wine-quality) | 
     [HTML report](https://gegznav.github.io/ds-projects/red-wine-quality/)
+    - Highlights: linear and logistic regression, exploratory PCA (principal compnent analysis)
 
-3. **The Insights on European Football** (data analysis project)
+4. **The Insights on European Football** (data analysis project)
     - Main tools: Python, SQL | 
     [Repository](https://github.com/GegznaV/ds-projects/tree/main/european-football) | 
     [HTML report](https://gegznav.github.io/ds-projects/european-football) 
     
-4. **Travel Insurance Claim Prediction** (data analysis project)
+5. **Travel Insurance Claim Prediction** (data analysis/machine learning project)
     - Main tools: Python | 
     [Repository](https://github.com/GegznaV/ds-projects/tree/main/travel-insurance) | 
     [HTML report](https://gegznav.github.io/ds-projects/travel-insurance) 
+    - Highlights: machine learning (classification)
 
 
 
