@@ -20,6 +20,7 @@ https://gegznav.github.io/ds-projects/mental-health
   </tr>
 </table>
 
+
 Annotation
 ----------
 
@@ -40,8 +41,9 @@ This project is dedicated to the analysis of these surveys' data, acquired in 20
 
 </div>
 
+
 Contents of This Directory
----------------------------
+--------------------------
 
 - `index.html`:
 Rendered report of the analysis **(the main file of this project)**.  
@@ -77,12 +79,16 @@ Reproducibility
 
 ### Working Directory
 
-During the installation and analysis, the working directory must be the root directory of this project (i.e., the directory containing the `mental-health.ipynb` file).
+During the installation and analysis, the working directory of all tools must be the root directory of this project 
+(i.e., the directory containing the `mental-health.ipynb` file).
 
 ### Tools
 
 This project uses Python 3.11 as the main data analysis tool.
-To run the analysis, it is recommended to create a separate virtual environment (e.g., `proj-mental-health`) and install the required Python packages there.
+
+To run the analysis, it is recommended to create a separate virtual environment 
+(e.g., `proj-mental-health`) 
+and install the required Python packages there.
 Assuming that [Anaconda](https://www.anaconda.com/download) is installed, this can be accomplished by running the following commands in the terminal:
 
 ```bash
@@ -93,7 +99,7 @@ pip install -r requirements.txt
 
 ### HTML Report
 
-To create the HTML report, install [Quarto](https://quarto.org/docs/download/) (version 1.4 or newer is recommended) and run the following command in the terminal:
+To create an HTML report, install [Quarto](https://quarto.org/docs/download/) (version 1.4 or newer is recommended) and run the following command in the terminal:
 
 ```bash
 quarto render mental-health.ipynb --to html --output index.html
