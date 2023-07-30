@@ -3,6 +3,7 @@ desktop.ini
 .Rproj.user
 .Rhistory
 tmp--*
+_backup/
 
 *.html
 !index.html
