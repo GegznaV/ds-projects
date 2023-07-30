@@ -1,4 +1,11 @@
-*/__pycache__/*
+**/__pycache__/*
+
+**/data/*
+**/docs/*
+*/saved-output/*
+*/renv/*
+
+__pycache/*
 desktop.ini
 .Rproj.user
 .Rhistory
