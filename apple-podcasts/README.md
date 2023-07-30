@@ -61,16 +61,22 @@ File with custom R functions.
 File with a list of Python packages required for this project.
 
 
-Working Directory
------------------
+Reproducibility
+---------------
 
-The working directory must be the root directory of this project (i.e., the directory containing the `apple-podcasts.ipynb` file).
+### Working Directory
+
+During the installation and analysis, the working directory of all tools must be the root directory of this project 
+(i.e., the directory containing the `apple-podcasts.ipynb` file).
 
 
-Install Requirements
---------------------
+### Tools
 
-To run the analysis, it is recommended to create a separate virtual environment (e.g., `proj-apple-podcasts`) and install the required Python packages there.
+This project uses Python 3.11 as the main data analysis tool and uses R 4.3.1 to run some scripts.
+
+To run the analysis, it is recommended to create a separate virtual environment 
+(e.g., `proj-apple-podcasts`) 
+and install the required Python packages there.
 Assuming that [Anaconda](https://www.anaconda.com/download) is installed, this can be accomplished by running the following commands in the terminal:
 
 ```bash
@@ -79,7 +85,7 @@ conda activate proj-apple-podcasts
 pip install -r requirements.txt
 ```
 
-It is also expected [program R](https://www.r-project.org/) version 4.3.1 is to be installed in "C:/PROGRA~1/R/R-4.3.1" with additional R packages `tibble`,  `dplyr`, `purrr`, `stringr`, `rstatix`, `multcompView`. To install the packages, the following R code can be used (in R console):
+TO work out of the box, it is also expected [program R](https://www.r-project.org/) version 4.3.1 to be installed in "C:/PROGRA~1/R/R-4.3.1" with additional R packages `tibble`,  `dplyr`, `purrr`, `stringr`, `rstatix`, and `multcompView`. To install the packages, the following R code can be used (in R console):
 
 ```r
 install.packages("tibble")
@@ -93,14 +99,14 @@ install.packages("multcompView")
 If you use a different version of R or have it installed in a different directory, you should change the path to it in both the `functions.py` and `apple-podcasts.ipynb` files.
 
 
-Create HTML Report
-------------------
+### HTML Report
 
 To create an HTML report, install [Quarto](https://quarto.org/docs/download/) (version 1.4 or newer is recommended) and run the following command in the terminal:
 
 ```bash
 quarto render apple-podcasts.ipynb --to html --output index.html
 ```
+
 
 Dashboard
 --------------
