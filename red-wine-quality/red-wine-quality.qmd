@@ -121,6 +121,12 @@ details[open].with-border {
 - dashboarding
 
 
+**Technical requirements:** 
+
+- Use a combination of R and Python programming languages in a single document.
+- Create a dashboard in Looker Studio.
+
+
 # Abbreviations {.unnumbered}
 
 - AIC – Akaike information criterion.
@@ -181,12 +187,12 @@ Variable based on sensory data:
 
 ## R and Python in a Single Analysis
 
-**RStudio** is an IDE for R and Python. In Quarto (`.qmd`) and R Markdown (`.rmd`) documents, RStudio supports an interface that allows using R and Python in a single document (e.g., we can access Python objects in R code cells by using `py$<python_object_name>`{.r} accessor, and access R objects in Pthon code cells by using `r.<r_object_name>`{.py} accessor). So additional technical tasks for this project were to:
+**RStudio** is an IDE for R and Python. In Quarto (`.qmd`) and R Markdown (`.rmd`) documents, RStudio supports an interface that allows using R and Python in a single document (e.g., we can access Python objects in R code cells by using `py$<python_object_name>`{.r} accessor, and access R objects in Python code cells by using `r.<r_object_name>`{.py} accessor). So additional technical tasks for this project were to:
 
 - Try RStudio capabilities for Python programming (documentation, data analysis, plotting, etc.).
 - Try RStudio interface between R and Python: use these 2 tools in the same file.
 
-Main principles how it was lewveraged between R and Python in this project:
+Main principles how it was leveraged between R and Python in this project:
 
 - **Python** is used for all steps which are directly related to putting model into **production.**
 - **Some** exploratory analysis steps and **other tasks** that are easier to perform in R, are done **in R**.
