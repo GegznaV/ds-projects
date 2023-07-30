@@ -20,6 +20,7 @@ You should **study the report** available **via this link:**
   </tr>
 </table>
 
+
 Annotation and Summary
 ----------------------
 
@@ -30,7 +31,7 @@ In this project, a comprehensive analysis of the **travel insurance** dataset wa
 
 
 Contents of This Directory
----------------------------
+--------------------------
 
 - `index.html`:
 Rendered report of the analysis **(the main file of this project)**.  
@@ -64,11 +65,21 @@ Utility file for Git.
 File with a list of Python packages required for this project.
 
 
+Reproducibility
+---------------
 
-Install Requirements
---------------------
+### Working Directory
 
-To run the analysis, it is recommended to create a separate virtual environment (e.g., `proj-travel-insurance`) and install the required Python packages there.
+During the installation and the analysis, the working directory of all tools must be the root directory of this project 
+(i.e., the directory containing the `travel-insurance.ipynb` file).
+
+### Tools
+
+This project uses Python 3.11 as the main data analysis tool.
+
+To run the analysis, it is recommended to create a separate virtual environment 
+(e.g., `proj-travel-insurance`) 
+and install the required Python packages there.
 Assuming that [Anaconda](https://www.anaconda.com/download) is installed, this can be accomplished by running the following commands in the terminal:
 
 ```bash
@@ -78,10 +89,9 @@ pip install -r requirements.txt
 ```
 
 
-Create HTML Report
-------------------
+### HTML Report
 
-To create the HTML report, install [Quarto](https://quarto.org/docs/download/) (version 1.4 or newer is recommended) and run the following command in the terminal:
+To create an HTML report, install [Quarto](https://quarto.org/docs/download/) (version 1.4 or newer is recommended) and run the following command in the terminal:
 
 ```bash
 quarto render travel-insurance.ipynb --to html --output index.html
