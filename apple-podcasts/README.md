@@ -96,7 +96,7 @@ If you use a different version of R or have it installed in a different director
 Create HTML Report
 ------------------
 
-To create the HTML report, install [Quarto](https://quarto.org/docs/download/) (version 1.4 or newer is recommended) and run the following command in the terminal:
+To create an HTML report, install [Quarto](https://quarto.org/docs/download/) (version 1.4 or newer is recommended) and run the following command in the terminal:
 
 ```bash
 quarto render apple-podcasts.ipynb --to html --output index.html

@@ -72,15 +72,16 @@ File with a list of Python packages required for this project.
     Jupyter notebook with the code that lists the questions, which are common among several surveys stored within the database. 
 
 
-Working Directory
------------------
+Reproducibility
+---------------
 
-The working directory must be the root directory of this project (i.e., the directory containing the `mental-health.ipynb` file).
+### Working Directory
 
+During the installation and analysis, the working directory must be the root directory of this project (i.e., the directory containing the `mental-health.ipynb` file).
 
-Install Requirements
---------------------
+### Tools
 
+This project uses Python 3.11 as the main data analysis tool.
 To run the analysis, it is recommended to create a separate virtual environment (e.g., `proj-mental-health`) and install the required Python packages there.
 Assuming that [Anaconda](https://www.anaconda.com/download) is installed, this can be accomplished by running the following commands in the terminal:
 
@@ -90,9 +91,7 @@ conda activate proj-mental-health
 pip install -r requirements.txt
 ```
 
-
-Create HTML Report
-------------------
+### HTML Report
 
 To create the HTML report, install [Quarto](https://quarto.org/docs/download/) (version 1.4 or newer is recommended) and run the following command in the terminal:
 
