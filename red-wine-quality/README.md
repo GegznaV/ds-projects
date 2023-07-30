@@ -75,17 +75,20 @@ File with the list of Python packages required for this project.
 - `project-RStudio.Rproj`: 
 File with RStudio project configuration.
 
+Reproducibility
+---------------
 
-Working Directory
------------------
+### Working Directory
 
-The working directory must be the root directory of this project (i.e., the directory containing the `red-wine-quality.qmd` file).
+During the installation and analysis, the working directory of all tools must be the root directory of this project 
+(i.e., the directory containing the `red-wine-quality.qmd` file).
 
 
-Install Tools and Requirements
--------------------------------
+### Tools
 
-Programs [R](https://www.r-project.org/) (required) and RStudio should be installed as well as R packages `tidyverse`, `renv`, `reticulate`, `factoextra`, `DescTools`, `patchwork`, `knitr`, `pandoc`, `ggstatsplot` (and their dependencies: R installs them automatically). To install the packages, the following R code can be used (in R console):
+This project uses both R 4.3.1 and Python 3.11 as the main data analysis tools.
+
+Programs [R](https://www.r-project.org/) (required) and RStudio should be installed as well as R packages `renv`, `tidyverse`, `reticulate`, `factoextra`, `DescTools`, `patchwork`, `knitr`, `pandoc`, `ggstatsplot`, and `rmarkdown` as well as their dependencies. To install the packages, the following R code can be used (in R console):
 
 ``` r
 install.packages("tidyverse")
@@ -97,6 +100,7 @@ install.packages("patchwork")
 install.packages("knitr")
 install.packages("pandoc")
 install.packages("ggstatsplot")
+install.packages("rmarkdown")
 ```
 
 To work properly, RStudio might ask to install some additional packages.
@@ -114,10 +118,9 @@ Then configure RStudio to use this virtual environment (see the section "Selecti
 
 
 
-Create HTML Report
-------------------
+### HTML Report
 
-To create the HTML report, install [Quarto](https://quarto.org/docs/download/) (version 1.4 or newer is recommended) and run the following command in the terminal:
+To create an HTML report, install [Quarto](https://quarto.org/docs/download/) (version 1.4 or newer is recommended) and run the following command in the terminal:
 
 ```bash
 quarto render red-wine-quality.qmd --to html --output index.html
