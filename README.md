@@ -13,16 +13,16 @@ Data analysis:
     - Highlights: categorical data analysis
 
 2. **The Analysis of *Apple Podcasts* Reviews** (data analysis project)
-    - Main tools: R, Python | 
+    - Main tools: Python,  R | 
     [Repository](https://github.com/GegznaV/ds-projects/tree/main/apple-podcasts) | 
     [HTML report](https://gegznav.github.io/ds-projects/apple-podcasts/)
     - Highlights: inferential statistics
 
-3. **Red Wine Quality** (data analysis project)
+3. **Red Wine Quality Prediction** (data analysis project)
     - Main tools: R, Python | 
     [Repository](https://github.com/GegznaV/ds-projects/tree/main/red-wine-quality) | 
     [HTML report](https://gegznav.github.io/ds-projects/red-wine-quality/)
-    - Highlights: linear and logistic regression, exploratory PCA (principal compnent analysis)
+    - Highlights: linear and logistic regression, exploratory PCA (principal component analysis)
 
 4. **The Insights on European Football** (data analysis project)
     - Main tools: Python, SQL | 
@@ -33,8 +33,7 @@ Data analysis:
     - Main tools: Python | 
     [Repository](https://github.com/GegznaV/ds-projects/tree/main/travel-insurance) | 
     [HTML report](https://gegznav.github.io/ds-projects/travel-insurance) 
-    - Highlights: machine learning (classification)
-
+    - Highlights: machine learning (classification, hyperparameter tuning, model selection)
 
 
 Software Engineering:
