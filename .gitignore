@@ -10,6 +10,7 @@ desktop.ini
 .Rproj.user
 .Rhistory
 tmp--*
+--backup
 _backup/
 
 *.html
