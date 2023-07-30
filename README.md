@@ -35,7 +35,6 @@ Data analysis:
     [HTML report](https://gegznav.github.io/ds-projects/travel-insurance) 
     - Highlights: machine learning (classification, hyperparameter tuning, model selection)
 
-
 Software engineering:
 
 1. **Simple Calculator in Python** (Python package) :
