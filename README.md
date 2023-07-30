@@ -28,12 +28,14 @@ Data analysis:
     - Main tools: Python, SQL | 
     [Repository](https://github.com/GegznaV/ds-projects/tree/main/european-football) | 
     [HTML report](https://gegznav.github.io/ds-projects/european-football) 
+    - Highlights: exploratory data analysis, inferential statistics, and predictive modeling
     
 5. **Travel Insurance Claim Prediction** (data analysis/machine learning project)
     - Main tools: Python | 
     [Repository](https://github.com/GegznaV/ds-projects/tree/main/travel-insurance) | 
     [HTML report](https://gegznav.github.io/ds-projects/travel-insurance) 
     - Highlights: machine learning (classification, hyperparameter tuning, model selection)
+
 
 Software engineering:
 
