@@ -104,7 +104,7 @@ During the installation and analysis, the working directory of all tools must be
 
 This project uses both R 4.3.1 and Python 3.11 as the main data analysis tools.
 
-1) Programs [R](https://www.r-project.org/) (version 4.3.1) and RStudio (the newest version) should be installed.
+1) Programs [R](https://www.r-project.org/) (version 4.3.1) and [RStudio](https://posit.co/download/rstudio-desktop/) (the newest version) should be installed.
   
 2)  Next, install the R package `renv`.  To install it, the following R code can be used (in the **R console**):
 ``` r
