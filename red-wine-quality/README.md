@@ -48,11 +48,14 @@ Contents of This Directory
 Rendered report of the analysis **(the main file of this project)**.  
 View it via the link provided above.
 
-- `red-wine-quality.qmd`: 
+- `red-wine-quality.qmd`:
 Source code of the data analysis (Quarto notebook).
 
+- `_extensions`:
+Directory for Quarto extensions.
+
 - `assets`:
-Directory that contains file with bibliography and related links.
+Directory that contains the file with bibliography and related links.
 
 - `data`:
 Directory for data and related links.
@@ -60,20 +63,27 @@ Directory for data and related links.
 - `img`:
 Directory for images and pictures.
 
-- `_extensions`:
-Directory for Quarto extensions.
+- `renv`:
+Directory that contains files needed for reproducibility.
+
+- `.Rprofile`:
+File with the R script that is executed every time R is started.
+This is needed for reproducibility.
 
 - `.gitignore`:
 Utility file for Git.
 
+- `project-RStudio.Rproj`:
+File with RStudio project configuration.
+
 - `pyproject.toml`:
 File with the configuration used by Quarto filter `black-formatter`.
 
+- `renv.lock`:
+File with the list of R packages required for this project.
+
 - `requirements.txt`: 
 File with the list of Python packages required for this project.
-
-- `project-RStudio.Rproj`: 
-File with RStudio project configuration.
 
 Reproducibility
 ---------------
@@ -86,23 +96,22 @@ During the installation and analysis, the working directory of all tools must be
 
 ### Tools
 
-
 This project uses both R 4.3.1 and Python 3.11 as the main data analysis tools.
 
 1) Programs [R](https://www.r-project.org/) (version 3.4.1) and RStudio (the newest version) should be installed.
   
-2)  Next, install the R package `renv`.  To install it, the following R code can be used (in the R console):
+2)  Next, install the R package `renv`.  To install it, the following R code can be used (in the **R console**):
 ``` r
 install.packages("renv")
 ```
 
-3) To install the remaining required R packages, run the following command in the R console and wait until the process ends:
+3) To install the remaining required R packages, run the following command in the **R console** and wait until the process ends:
 ```r
 renv::restore()
 ```
 
 4) To run the Python code, it is recommended to create a separate virtual environment (e.g., `renv/conda-env`) and install the required Python packages there.
-Assuming that [Anaconda](https://www.anaconda.com/download) is installed, this can be accomplished by running the following commands in the terminal:
+Assuming that [Anaconda](https://www.anaconda.com/download) is installed, this can be accomplished by running the following commands in the **terminal**:
 
 ```bash
 conda create -p renv/conda-env python=3.11
@@ -110,46 +119,10 @@ conda activate renv/conda-env
 pip install -r requirements.txt
 ```
 
-
-5) Then configure RStudio to use this virtual environment
-
+5) Then configure RStudio to use this virtual environment by running the following code in the **R console**:
 ```r
 renv::use_python(type = 'conda', name = 'renv/conda-env')
 ```
-
-
-<!--
-This project uses both R 4.3.1 and Python 3.11 as the main data analysis tools.
-
-Programs [R](https://www.r-project.org/) (required) and RStudio should be installed as well as R packages `renv`, `tidyverse`, `reticulate`, `factoextra`, `DescTools`, `patchwork`, `knitr`, `pandoc`, `ggstatsplot`, and `rmarkdown` as well as their dependencies. To install the packages, the following R code can be used (in the R console):
-
-``` r
-install.packages("tidyverse")
-install.packages("renv")
-install.packages("reticulate")
-install.packages("factoextra")
-install.packages("DescTools")
-install.packages("patchwork")
-install.packages("knitr")
-install.packages("pandoc")
-install.packages("ggstatsplot")
-install.packages("rmarkdown")
-```
-
-To work properly, RStudio might ask to install some additional packages.
-
-To run the Python code, it is recommended to create a separate virtual environment (e.g., `proj-red-wine-quality`) and install the required Python packages there.
-Assuming that [Anaconda](https://www.anaconda.com/download) is installed, this can be accomplished by running the following commands in the terminal:
-
-```bash
-conda create -n proj-red-wine-quality python=3.11
-conda activate proj-red-wine-quality
-pip install -r requirements.txt
-```
-
-Then configure RStudio to use this virtual environment (see the section "Selecting a Default Version of Python" in the ["Using Python with the RStudio IDE"](https://support.posit.co/hc/en-us/articles/1500007929061-Using-Python-with-the-RStudio-IDE) tutorial.)
-
--->
 
 ### HTML Report
 
