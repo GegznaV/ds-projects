@@ -44,12 +44,16 @@ b) **explanation** (to identify, which are the most important factors for the pr
 Contents of This Directory
 --------------------------
 
+Main:
+
 - `index.html`:
 Rendered report of the analysis **(the main file of this project)**.  
 View it via the link provided above.
 
 - `red-wine-quality.qmd`:
 Source code of the data analysis (Quarto notebook).
+
+Directories:
 
 - `_extensions`:
 Directory for Quarto extensions.
@@ -65,6 +69,8 @@ Directory for images and pictures.
 
 - `renv`:
 Directory that contains files needed for reproducibility.
+
+Files:
 
 - `.Rprofile`:
 File with the R script that is executed every time R is started.
