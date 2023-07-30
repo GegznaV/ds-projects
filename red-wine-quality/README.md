@@ -86,8 +86,6 @@ During the installation and analysis, the working directory of all tools must be
 
 ### Tools
 
-<!--
-(Alternative workflow)
 
 This project uses both R 4.3.1 and Python 3.11 as the main data analysis tools.
 
@@ -119,8 +117,8 @@ pip install -r requirements.txt
 renv::use_python(type = 'conda', name = 'renv/conda-env')
 ```
 
--->
 
+<!--
 This project uses both R 4.3.1 and Python 3.11 as the main data analysis tools.
 
 Programs [R](https://www.r-project.org/) (required) and RStudio should be installed as well as R packages `renv`, `tidyverse`, `reticulate`, `factoextra`, `DescTools`, `patchwork`, `knitr`, `pandoc`, `ggstatsplot`, and `rmarkdown` as well as their dependencies. To install the packages, the following R code can be used (in the R console):
@@ -151,7 +149,7 @@ pip install -r requirements.txt
 
 Then configure RStudio to use this virtual environment (see the section "Selecting a Default Version of Python" in the ["Using Python with the RStudio IDE"](https://support.posit.co/hc/en-us/articles/1500007929061-Using-Python-with-the-RStudio-IDE) tutorial.)
 
-
+-->
 
 ### HTML Report
 
