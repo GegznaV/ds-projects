@@ -33,12 +33,17 @@ In this project, a comprehensive analysis of the **travel insurance** dataset wa
 Contents of This Directory
 --------------------------
 
+Main:
+
 - `index.html`:
 Rendered report of the analysis **(the main file of this project)**.  
 View it via the link provided above.
 
 - `travel-insurance.ipynb`:
 Source code of the data analysis (Jupyter notebook).
+
+
+Directories:
 
 - `.saved-results`:  
 Directory for cached data analysis results (it may be not visible on GitHub).
@@ -57,6 +62,9 @@ Directory for data analysis functions, methods and classes.
 
 - `img`:
 Directory for images and pictures.
+
+
+Files:
 
 - `.gitignore`:
 Utility file for Git.
