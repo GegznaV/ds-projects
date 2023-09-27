@@ -1,7 +1,6 @@
 """Functions and classes to perform statistical analysis and output the results."""
 
 from typing import Optional, Union
-
 from IPython.display import display
 
 import humanize
@@ -17,9 +16,14 @@ import plotly.graph_objs as go
 
 import functions.fun_utils as my  # Custom module
 import functions.cld as cld  # Custom module; CLD calculations
-# import functions.pandas_methods  # Custom module; imports method .to_df()
+
 
 from statsmodels.graphics.mosaicplot import mosaic
+from statsmodels.stats.multitest import multipletests as p_adjust
+
+from pandas.api.types import is_integer_dtype
+from sklearn.feature_selection import mutual_info_classif
+
 
 # Functions =================================================================
 
@@ -228,7 +232,6 @@ def col_info(
     n_dominant = data.apply(lambda x: x.value_counts().max())
     dominant = data.apply(lambda x: x.value_counts().idxmax())
 
-    # n_dominant=0
     info = pd.DataFrame({
         "column": data.columns,
         "data_type": data.dtypes,
@@ -257,7 +260,6 @@ def col_info(
                 p_dominant=lambda d: my.format_percent(d["p_dominant"]),
             )
             .style
-            # .hide(axis="index")
             .applymap(
                 my.highlight_int_float_text, color=color_numeric, subset=["data_type"]
             )
@@ -504,9 +506,6 @@ class AnalyzeCounts:
         self.omnibus = None
         self.n_ci_and_cld = None
         self.descriptive_stats = None
-
-        # def fit(self):
-        #     """Perform count data analysis: calculate the results."""
 
         # Alias attributes
         counts = self.counts
@@ -1190,78 +1189,7 @@ class Crosstab:
         )
 
         return fig
-
-    # def mosaic_go(self, title: str = None, xlabel: str = None, ylabel: str = None, **kwargs):
-    #     """Plot a Cross-Tabulation as a merimekko (mosaic) chart using Plotly.
-
-    #     Args:
-    #         title (str, optional): Title of the plot.
-    #         xlabel (str, optional): Label for the x-axis. If None (default),
-    #                                 the name will be used.
-    #         ylabel (str, optional): Label for the y-axis. If None (default),
-    #                                 the name will be used.
-    #         **kwargs: Additional keyword arguments to be passed to the Plotly go.Figure().
-
-    #     Returns:
-    #         go.Figure: The created merimekko chart Figure.
-    #     """
-    #     crosstab = self.crosstab
-
-    #     if xlabel is None:
-    #         xlabel = self.xlabel
-
-    #     if ylabel is None:
-    #         ylabel = self.ylabel
-
-    #     labels = list(crosstab.index)
-    #     widths = np.array(crosstab.sum(axis=1))
-
-    #     fig = go.Figure()
-    #     for col in crosstab.columns:
-    #         values = crosstab[col]
-    #         fig.add_trace(go.Bar(
-    #             name=col,
-    #             y=values,
-    #             x=np.cumsum(widths) - widths,
-    #             width=widths,
-    #             offset=0,
-    #             customdata=np.transpose([labels, widths * values]),
-    #             texttemplate="%{y} x %{width} =<br>%{customdata[1]}",
-    #             textposition="inside",
-    #             textangle=0,
-    #             textfont_color="white",
-    #             hovertemplate="<br>".join([
-    #                 "Category: %{customdata[0]}",
-    #                 "Total: %{width}",
-    #                 "Value: %{y}",
-    #                 "Area: %{customdata[1]}",
-    #             ])
-    #         ))
-
-    #     fig.update_xaxes(
-    #         tickvals=np.cumsum(widths) - widths / 2,
-    #         ticktext=["%s<br>%d" % (l, w) for l, w in zip(labels, widths)]
-    #     )
-
-    #     fig.update_xaxes(range=[0, sum(widths)])
-    #     fig.update_yaxes(range=[0, max(crosstab.max())])
-
-    #     fig.update_layout(
-    #         title_text=title if title else "Merimekko Chart",
-    #         barmode="stack",
-    #         uniformtext=dict(mode="hide", minsize=10),
-    #         **kwargs
-    #     )
-
-    #     return fig
-
-
-import pandas as pd
-from pandas.api.types import is_integer_dtype
-from sklearn.feature_selection import mutual_info_classif
-
-from statsmodels.stats.multitest import multipletests as p_adjust
-
+    
 
 def get_mutual_information(
     data: pd.DataFrame,

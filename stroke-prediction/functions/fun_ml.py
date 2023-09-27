@@ -6,14 +6,9 @@ import matplotlib.pyplot as plt
 import matplotlib.ticker as mticker
 import functions.fun_utils as my  # Custom module
 
-from typing import Union
 from IPython.display import display
-from mlxtend.feature_selection import SequentialFeatureSelector
-from sklearn.decomposition import PCA
-from sklearn.preprocessing import StandardScaler
+
 from sklearn.metrics import (
-    mean_squared_error as mse,
-    r2_score,
     f1_score,
     accuracy_score,
     balanced_accuracy_score,
@@ -21,64 +16,7 @@ from sklearn.metrics import (
     cohen_kappa_score,
     recall_score,
     precision_score,
-    classification_report,
-    confusion_matrix,
 )
-
-
-# Helpers
-def as_formula(
-    target: str = None,
-    include: Union[list[str], pd.DataFrame] = None,
-    exclude: list[str] = None,
-    add: str = "",
-):
-    """
-    Generates the R style formula for statsmodels (patsy) given
-    the dataframe, dependent variable and optional excluded columns
-    as strings.
-
-    Args:
-        target (str): name of target variable.
-        include (pandas.DataFrame or list[str]):
-            dataframe of column names to include.
-        exclude (list[str], optional):
-            columns to exclude.
-        add (str): string to add to formula, e.g., "+ 0"
-
-    Return:
-        String with R style formula for `patsy` (e.g., "target ~ x1 + x2").
-
-    See also: https://stackoverflow.com/a/44866142/4783029
-    """
-    if isinstance(include, pd.DataFrame):
-        include = list(include.columns.values)
-
-    if target in include:
-        include.remove(target)
-
-    if exclude is not None:
-        for col in exclude:
-            include.remove(col)
-
-    return target + " ~ " + " + ".join(include) + add
-
-
-def get_columns_by_purpose(data, target: str):
-    """Split data frame into 3 data frames: for target, numeric, and remaining
-    variables.
-
-    Examples:
-    >>> # Split
-    >>> d_target, d_num, d_other = get_columns_by_purpose(data, "class")
-
-    >>> # Merge back
-    >>> pd.concat([d_target, d_num, d_other], axis=1)
-    """
-    d_num = data.drop(columns=target).select_dtypes("number")
-    d_other = data.drop(columns=[target, *d_num.columns.values])
-
-    return data[target].to_frame(), d_num, d_other
 
 
 def get_metric_abbreviation_and_sign(scoring: str):
@@ -101,32 +39,6 @@ def get_metric_abbreviation_and_sign(scoring: str):
 
 
 # Feature selection
-def sfs(estimator, est_type, k_features="parsimonious", forward=True):
-    """Create SFS instance for classification
-
-    Args.:
-        est_type (str): classification or regression
-        other arguments: see mlextend.SequentialFeatureSelector()
-    """
-    if est_type == "regression":
-        scoring = "neg_root_mean_squared_error"
-    elif est_type == "classification":
-        scoring = "balanced_accuracy"
-    else:
-        raise Exception(f"Unrecognized learner/estimator type: {type}")
-
-    return SequentialFeatureSelector(
-        estimator,
-        k_features=k_features,  # "parsimonious",
-        forward=forward,
-        floating=False,
-        scoring=scoring,
-        verbose=1,
-        cv=5,
-        n_jobs=-1,
-    )
-
-
 def sfs_get_score(sfs_object, k_features):
     """Return performance score achieved with certain number of features.
 
@@ -267,31 +179,6 @@ def sfs_list_features(sfs_result):
     )
 
 
-# Functions for regression
-
-
-def get_regression_performance(y_true, y_pred, name=""):
-    """Evaluate regression model performance
-
-    Calculate R², RMSE, and SD of predicted variable
-
-    Args.:
-      y_true, y_pred: true and predicted numeric values.
-      name (str): the name of investigated set.
-    """
-    return (
-        pd.DataFrame({
-            "set": name,
-            "n": len(y_true),
-            "SD": [float(np.std(y_true))],
-            "RMSE": [float(mse(y_true, y_pred, squared=False))],
-            "R²": [float(r2_score(y_true, y_pred))],
-        })
-        .eval("RMSE_SD_ratio = RMSE/SD")
-        .eval("SD_RMSE_ratio = SD/RMSE")
-    )
-
-
 # Functions for classification
 def get_classification_scores(model, X, y):
     """Calculate scores of classification performance for a model.
@@ -374,122 +261,3 @@ def print_classification_scores(
         .style.format(precision=precision)
         .apply(my.highlight_max, color=color)
     )
-
-
-# Classification ===========================================================
-
-
-def classification_report_with_confusion_matrix(best_models, X, y, labels=[1, 0]):
-    """
-    Function to print a classification report with a confusion matrix.
-
-    Reference to interpret confusion matrix:
-
-    - rows: true class
-    - columns: predicted class
-    - cells contain counts. Usually, the meaning is as follows:
-    ```
-    TN FP
-    FN TP
-    ```
-    (T - true, F - false, P - positive, N - negative)
-
-    Args:
-        best_models (dict): Dictionary containing the best models.
-        X (pd.DataFrame): Dataframe containing the features.
-        y (pd.Series): Series containing the target.
-        labels (list): List containing the labels for confusion matrix.
-    """
-    [
-        [
-            y_pred := model.predict(X),
-            print(
-                "<<< " + name + " >>>",
-                "\n",
-                classification_report(y, y_pred),
-                "\n",
-                "Confusion matrix (order of labels is " + str(labels) + "): \n",
-                "rows = true labels, columns = predicted labels \n",
-                confusion_matrix(y, y_pred, labels=labels),
-                "\n",
-                "\n\n",
-            ),
-        ]
-        for name, model in best_models.items()
-    ]
-
-
-# PCA ---------------------------------------------------------------------------
-def pca_screeplot(data, n_components=30):
-    """Plot PCA screeplot
-
-    Args:
-        data (pandas.Dataframe): Numeric data
-        n_components (int, optional):
-            Max number of principal components to extract.
-            Defaults to 30.
-
-    Returns:
-        3 objects: plot (fig and ax) and pca object.
-    """
-    scale = StandardScaler()
-    pca = PCA(n_components=n_components)
-
-    scaled_data = scale.fit_transform(data)
-    pca.fit(scaled_data)
-
-    pct_explained = pca.explained_variance_ratio_ * 100
-
-    fig, ax = plt.subplots(figsize=(8, 4))
-    ax.plot(pct_explained, "-o", color="tab:green")
-
-    ax.set_xlabel("Number of components")
-    ax.set_ylabel("% of explained variance")
-
-    return fig, ax, pca
-
-
-def do_pca(data, target: str, n_components: int = 10, scale=None, pca=None):
-    """Do PCA on numeric non-target variables
-
-    Args:
-        data (pandas.Dataframe): data
-        target (str): Target variable name
-        n_components (int, optional):
-            Number of PCA components to extract.
-            Defaults to 10.
-            n_components is ignored if `pca` is not None.
-        scale (instance of sklearn.preprocessing.StandardScaler or None):
-            Fitted object to scale data.
-        pca (instance of sklearn.decomposition.PCA or None):
-            Fitted PCA object.
-
-    Returns:
-        tuple with 6 elements:
-          - 4 data frames: d_target, d_num, d_other, d_pca
-          - fitted instance of sklearn.preprocessing.StandardScaler.
-          - fitted instance of sklearn.decomposition.PCA.
-    """
-    d_target, d_num, d_other = get_columns_by_purpose(data, target)
-
-    if scale is None:
-        scale = StandardScaler()
-        sc_data = scale.fit_transform(d_num)
-    else:
-        sc_data = scale.transform(d_num)
-
-    if pca is None:
-        pca = PCA(n_components=n_components)
-        pc_num = pca.fit_transform(sc_data)
-    else:
-        pc_num = pca.transform(sc_data)
-        n_components = pc_num.shape[1]
-
-    # Convert to DataFrame and name columns (pc_1, pc_2, etc.)
-    d_pca = pd.DataFrame(
-        pc_num,
-        index=d_num.index,
-        columns=[f"pc_{i}" for i in np.arange(1, n_components + 1)],
-    )
-
-    return (d_target, d_num, d_other, d_pca, scale, pca)

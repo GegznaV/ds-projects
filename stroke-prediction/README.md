@@ -78,6 +78,10 @@ Utility file for Git.
 - `requirements.txt`: 
 File with a list of Python packages required for this project.
 
+Additional repositories:
+
+- Code, objects, etc. that were used for deployment are available in a separate Github repository [GegznaV/deploy-stroke-prediction](https://github.com/GegznaV/deploy-stroke-prediction)  
+  
 
 ## Reproducibility
 ### Working Directory

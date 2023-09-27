@@ -1,7 +1,5 @@
 """Various functions for data pre-processing, analysis and plotting."""
 
-# OS module
-import os
 
 # Other Python libraries and modules
 import re
@@ -15,9 +13,8 @@ from typing import Union
 from IPython.display import display, HTML
 from matplotlib.ticker import MaxNLocator
 
+
 # Utilities ==================================================================
-
-
 # Check/Assert
 def index_has_names(obj: Union[pd.Series, pd.DataFrame]) -> bool:
     """Check if index of a Pandas object (Series of DataFrame) has names.
