@@ -1,28 +1,23 @@
 # Flask App to Deploy Predictive Models
 
 This directory contains the files required to create a Flask application with machine learning models based on **Lending Club** data and deploy it on **Google Cloud Platform** (GCP). The application allows accessing 4 different models.
-To access the models and other functionality, use the main URL of the app and add the following routes:
+To access the models and other functionality, use the main URL of the app and add the following routes.
 
-- The **main URL** on GCP currently is: <https://lending-club-app-x6jg32rquq-ew.a.run.app> 
-- Test if the service is up and running: /test 
-- **Model 1** (loan application status prediction): /api/predict-loan-status
-- **Model 2** (grade prediction): /api/predict-grade
-- **Model 3** (sub-grade prediction): /api/predict-subgrade
-- **Model 4** (interest rate prediction): /api/predict-interest-rate
-
-
-You may access the application via an online server or use a local development server.
-For predictions, you send a request to the application providing the required information as a JSON object (see examples below).
+- The **main URL** on GCP currently is: <https://lending-club-app-x6jg32rquq-ew.a.run.app>
+- The **routes:**
+    - Test if the service is up and running: /test 
+    - **Model 1** (loan application status prediction): /api/predict-loan-status
+    - **Model 2** (grade prediction): /api/predict-grade
+    - **Model 3** (sub-grade prediction): /api/predict-subgrade
+    - **Model 4** (interest rate prediction): /api/predict-interest-rate
+    
+You may access the application via an online server or a local development server.
+For predictions, you send a request to the application providing the required information as a JSON object (see examples below).  In the examples, command line tool `curl` will be ued. The data used in the examples are present in `test-data/` directory.
 
 
 ### Predictions via Online Server
 
-The model is deployed on the Google Cloud Platform (GCP) and accessible via the URL <https://lending-club-app-x6jg32rquq-ew.a.run.app>. 
-You may test if the service is up via route `/test` and make predictions via route `/api/predict`. 
-
-
-The examples to test the service will use `curl` command line tool.
-To run the examples, `curl` must be installed.
+To run the examples, command line tool `curl` must be installed.
 
 - Test if the service is up and running:
 
