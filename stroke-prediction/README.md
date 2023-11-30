@@ -128,16 +128,16 @@ For predictions, you send a request to the application providing the following i
 - `health_risk_score` (integer from 0 to 5);
 - `smoking_status` (one of the following: `never smoked`, `formerly smoked`, `smokes`, `Unknown`).
 
-You may access the application via online server or use a local development server.
+You may access the application via an online server or use a local development server.
 
 ### Predictions via Online Server
 
-Model is deployed on Render.com and accessible via URL <https://stroke-prediction-af8t.onrender.com>. 
-You may test if server is up via route `/test` and make predictions via route `/api/predict`. 
+The model is deployed on Render.com and accessible via URL <https://stroke-prediction-af8t.onrender.com>. 
+You may test if the server is up via route `/test` and make predictions via route `/api/predict`. 
 
 
 The examples to test the service will use `curl` command line tool.
-To to run the examples `curl` must be installed.
+To run the examples `curl` must be installed.
 
 
 ```bash
@@ -187,7 +187,7 @@ Response (again manually formatted):
 
 ### Predictions Locally via Development Server
 
-To deploy app locally and ant test its responses, download the contents of GitHub repository (see above) to your working directory and run the following commands in the terminal:
+To deploy the app locally and ant test its responses, download the contents of the GitHub repository (see above) to your working directory and run the following commands in the terminal:
 
 ```bash
 python stroke_prediction_app.py
