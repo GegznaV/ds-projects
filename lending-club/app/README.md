@@ -12,7 +12,7 @@ To access the models and other functionality, use the main URL of the app and ad
     - **Model 4** (interest rate prediction): /api/predict-interest-rate
     
 You may access the application via an online server or a local development server.
-For predictions, you send a request to the application providing the required information as a JSON object (see examples below).  In the examples, command line tool `curl` will be ued. The data used in the examples are present in `test-data/` directory.
+For predictions, you send a request to the application providing the required information as a JSON object (see examples below).  In the examples, command line tool `curl` will be ued. The **data** used in the examples are present in `test-data/` directory.
 
 
 ### Predictions via Online Server
