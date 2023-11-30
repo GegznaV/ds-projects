@@ -45,7 +45,7 @@ Data analysis:
 7. **Lending Club Loan Data Analysis** (data analysis/machine learning project)
     - Main tools: Python | 
     [Repository](https://github.com/GegznaV/ds-projects/tree/main/lending-club) | 
-    [HTML report](https://gegznav.github.io/ds-projects/lending-club) | [Flask app](https://gegznav.github.io/ds-projects/lending-club/app)
+    [HTML report](https://gegznav.github.io/ds-projects/lending-club) | [Flask app](https://github.com/GegznaV/ds-projects/tree/main/lending-club/app)
     - Highlights: machine learning (classification, regression, model selection, model deployment on Google Cloud Platform)
 
 
