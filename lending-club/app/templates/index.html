@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang=en>
+<head>
+<meta charset=utf-8>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ML-3 App | VG</title>
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="preload" as="font">
+<link href="/static/cloud-run-32-color.png" rel="icon" type="image/png" />
+<link href="/static/style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+	<div class="container">
+		<h1>Cloud-Based Predictions for Lending Club Loans</h1>
+		<p class="centered-text">Implemented by Vilmantas Gėgžna</p>
+		<div class="larger-top-margin">
+			<p>This is the main page of the application to make predictions 
+				based on <b>Lending Club</b> data, running 
+
+				{% if Service in "Unknown service"  %}
+					<i>locally</i>.
+				{% else %}
+					on the Google Cloud Platform (GCP):
+					<ul>
+						<li>Cloud Run service <code>{{Service}}</code></li>
+						<li>Revision <code>{{Revision}}</code></li>
+					</ul>
+				{% endif %}
+			</p>
+		</div>
+
+		<h3>To make predictions via API, use these routes:</h3>
+		<ol>
+			<li class="next">Loan status prediction model v{{model_1_version}}.   <i>Route</i>: <a href="/api/predict-loan-status" rel="noopener">/api/predict-loan-status</a> </li>
+			<li class="next">Grade prediction model v{{model_2_version}}.         <i>Route</i>: <a href="/api/predict-grade" rel="noopener">/api/predict-grade</a> </li>
+			<li class="next">Subgrade prediction model v{{model_3_version}}.      <i>Route</i>: <a href="/api/predict-subgrade" rel="noopener">/api/predict-subgrade</a> </li>
+			<li class="next">Interest rate prediction model v{{model_4_version}}. <i>Route</i>: <a href="/api/predict-interest-rate" rel="noopener">/api/predict-interest-rate</a> </li>
+		</ol>
+		<p>To test if the service is running, use route: <a href="/test" rel="noopener">/test</a></p><!-- target="_blank" -->
+	</div>
+</body>
+</html>
