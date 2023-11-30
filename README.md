@@ -35,6 +35,18 @@ Data analysis:
     [Repository](https://github.com/GegznaV/ds-projects/tree/main/travel-insurance) | 
     [HTML report](https://gegznav.github.io/ds-projects/travel-insurance) 
     - Highlights: machine learning (classification, hyperparameter tuning, model selection)
+    
+6. **Stroke Risk Prediction** (data analysis/machine learning project)
+    - Main tools: Python | 
+    [Repository](https://github.com/GegznaV/ds-projects/tree/main/stroke-prediction) | 
+    [HTML report](https://gegznav.github.io/ds-projects/stroke-prediction) 
+    - Highlights: machine learning (classification, hyperparameter tuning, model selection, model deployment on Render.com)
+
+7. **Lending Club Loan Data Analysis** (data analysis/machine learning project)
+    - Main tools: Python | 
+    [Repository](https://github.com/GegznaV/ds-projects/tree/main/lending-club) | 
+    [HTML report](https://gegznav.github.io/ds-projects/lending-club) | [Flask app](https://gegznav.github.io/ds-projects/lending-club/app)
+    - Highlights: machine learning (classification, regression, model selection, model deployment on Google Cloud Platform)
 
 
 Software engineering:
