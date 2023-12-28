@@ -1,0 +1,16 @@
+{
+    "total_rec_int": [3001.43, 11.578, 1397.82],
+    "total_rec_prncp": [1006.27, 3000.0, 1399.58],
+    "installment": [367.82, 93.10, 705.38],
+    "funded_amnt_inv": [11200.0, 3000.0, 30000.0],
+    "initial_list_status": ["w", "w", "w"],
+    "out_prncp_inv": [10193.73, 0.0, 28600.42],
+    "issue_d": ["Mar-2018", "Mar-2018", "Nov-2018"],
+    "loan_amnt": [11200.0, 3000.0, 30000.0],
+    "funded_amnt": [11200.0, 3000.0, 30000.0],
+    "disbursement_method": ["Cash", "Cash", "Cash"],
+    "out_prncp": [10193.73, 0.0, 28600.42],
+    "term": [" 60 months", " 36 months", " 60 months"],
+    "fico_range_high": [669.0, 764.0, 719.0]
+}
+

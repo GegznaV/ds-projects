@@ -1,0 +1,13 @@
+Dockerfile
+.dockerignore
+.vscode
+.idea
+.readmes
+README.md
+*.pyc
+*.pyo
+*.pyd
+_pycache_
+.pytest_cache
+test-data
+

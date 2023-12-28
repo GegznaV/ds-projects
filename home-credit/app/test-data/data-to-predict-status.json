@@ -1,0 +1,11 @@
+{
+    "risk_score_is_na": [1],
+    "risk_score": [null],
+    "employment_length_num": [0.0],
+    "debt_to_income_ratio": [32.96],
+    "month_cos": [-0.87],
+    "month_sin": [-0.5],
+    "employment_length_is_na": [0],
+    "title_len": [23.0],
+    "loan_amount": [35000.0]
+}

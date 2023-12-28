@@ -1,0 +1,18 @@
+{
+    "total_rec_int": [3001.43, 11.58, 1397.82],
+    "total_rec_prncp": [1006.27, 3000.0, 1399.58],
+    "issue_d": ["Mar-2018", "Mar-2018", "Nov-2018"],
+    "fico_range_high": [669.0, 764.0, 719.0],
+    "installment": [367.82, 93.10, 705.38],
+    "out_prncp": [10193.73, 0.0, 28600.42],
+    "funded_amnt": [11200.0, 3000.0, 30000.0],
+    "disbursement_method": ["Cash", "Cash", "Cash"],
+    "loan_amnt": [11200.0, 3000.0, 30000.0],
+    "bc_open_to_buy": [632.0, 30359.0, 17345.0],
+    "last_fico_range_high": [629.0, 764.0, 759.0],
+    "out_prncp_inv": [10193.73, 0.0, 28600.42],
+    "term": [" 60 months", " 36 months", " 60 months"],
+    "funded_amnt_inv": [11200.0, 3000.0, 30000.0],
+    "dti": [43.97, 0.58, 32.22],
+    "fico_range_low": [665.0, 760.0, 715.0]
+}

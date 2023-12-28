@@ -1,0 +1,95 @@
+body {
+	font-family: 'Roboto', sans-serif;
+	font-display: fallback;
+	background-size: cover;
+	background-position: center;
+	line-height: 1.6;
+}
+
+h1 {
+	font-size: 24px;
+	font-weight: bold;
+	margin-top: 50px;
+	margin-bottom: 0;
+	text-align: center;
+}
+
+h2 {
+	font-size: 18px;
+	font-weight: normal;
+	margin-top: 4px;
+}
+
+h3 {
+	font-size: 20px;
+	margin-bottom: 0px;
+}
+
+em {
+	font-weight: 600;
+	font-style: normal;
+}
+
+.centered-text {
+    text-align: center;
+}
+
+.next {
+	font-size: 15px;
+	margin-top: 8px;
+	margin-bottom: 8px;
+}
+
+.container {
+	max-width: 700px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.larger-top-margin {
+	margin-top: 72px;
+}
+
+.details {
+	clear: both;
+	height: 400px;
+	line-height: 1.8;
+}
+
+code {
+	font-family: 'Roboto Mono', Courier, monospace;
+	color: #A30038;
+	padding: 0 6px;
+	font-weight: 500;
+}
+
+@media (max-width: 600px) {
+	.hero .logo {
+		float: initial;
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.container {
+		margin-top: 0;
+	}
+
+	.hero {
+		margin-top: 0;
+		margin-bottom: 24px;
+	}
+}
+
+@media (prefers-color-scheme: dark) {
+	body {
+		background: white;
+		color: black;
+	}
+	a {
+		color: #8AB4F8;
+	}
+	a:visited {
+		color: #b48af8;
+	}
+}
