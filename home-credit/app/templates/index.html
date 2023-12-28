@@ -11,11 +11,11 @@
 
 <body>
 	<div class="container">
-		<h1>Cloud-Based Predictions for Home Credit Default Risk</h1>
+		<h1>Cloud-Based Home Credit Default Predictions</h1>
 		<p class="centered-text">Implemented by Vilmantas Gėgžna</p>
 		<div class="larger-top-margin">
 			<p>This is the main page of the application to make predictions 
-				based on <b>Home Credit Default Risk</b> data, running 
+				based on <b>Home Credit Group</b> data, running 
 
 				{% if Service in "Unknown service"  %}
 					<i>locally</i>.
@@ -32,14 +32,15 @@
 		<h3>To make predictions via API, use these routes:</h3>
 		<ol>
 			<li class="next">Predictions that require only data from the application: model v{{model_1_version}}.
-				<i>Route</i>: <a href="/api/predict" rel="noopener">/api/predict-basic</a> 
+				<i>Route</i>: <a href="/api/predict" rel="noopener">/api/predict</a> 
 			</li>
-			<li class="next">Predictions that require historical data: v{{model_2_version}}.
-				<i>Route</i>: <a href="/api/predict-with-credit-history" rel="noopener">/api/predict-with-history</a>
+			<li class="next">Predictions that also require credit history data: model v{{model_2_version}}.
+				<i>Route</i>: <a href="/api/predict-with-credit-history" rel="noopener">/api/predict-with-credit-history</a>
 			</li>
 
 		</ol>
 		<p>To test if the service is running, use route: <a href="/test" rel="noopener">/test</a></p><!-- target="_blank" -->
+		<p>More details on how to use the app are available <a href="https://gegznav.github.io/ds-projects/home-credit/app/" rel="noopener" target="_blank">here</a>.</p>
 	</div>
 </body>
 </html>
