@@ -304,7 +304,9 @@ def plot_confusion_matrices(
     ax[1].set_title("Proportions (true labels)")
     ax[2].set_title("Proportions (predicted labels)")
 
-    ConfusionMatrixDisplay.from_predictions(y_train, y_pred, ax=ax[0], **kwargs)
+    ConfusionMatrixDisplay.from_predictions(
+        y_train, y_pred, ax=ax[0], values_format="5,g", **kwargs
+    )
     ConfusionMatrixDisplay.from_predictions(
         y_train, y_pred, ax=ax[1], normalize="true", values_format="0.3f", **kwargs
     )
