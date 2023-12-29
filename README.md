@@ -45,8 +45,16 @@ Data analysis:
 7. **Lending Club Loan Data Analysis** (data analysis/machine learning project)
     - Main tools: Python | 
     [Repository](https://github.com/GegznaV/ds-projects/tree/main/lending-club) | 
-    [HTML report](https://gegznav.github.io/ds-projects/lending-club) | [Flask app](https://github.com/GegznaV/ds-projects/tree/main/lending-club/app)
+    [HTML report](https://gegznav.github.io/ds-projects/lending-club) | 
+    [Flask app](https://github.com/GegznaV/ds-projects/tree/main/lending-club/app)
     - Highlights: machine learning (classification, regression, model selection, model deployment on Google Cloud Platform)
+
+8. **Home Credit Default Risk Prediction** (data analysis/machine learning project)
+    - Main tools: Python | 
+    [Repository](https://github.com/GegznaV/ds-projects/tree/main/home-credit) | 
+    [HTML report](https://gegznav.github.io/ds-projects/home-credit) | 
+    [Flask app](https://github.com/GegznaV/ds-projects/tree/main/home-credit/app)
+    - Highlights: machine learning (classification, model selection, model deployment on Google Cloud Platform, SHAP values/explainability)
 
 
 Software engineering:
