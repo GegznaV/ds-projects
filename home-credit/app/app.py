@@ -12,10 +12,14 @@ set_config(transform_output="pandas")
 
 # Load the pre-processing pipelines with the models from disk
 model_version__basic_info = "1.0"
-pipeline_basic_info = joblib.load("./models/classifier-1--without_credit_history.pickle")
+pipeline_basic_info = joblib.load(
+    "./models/classifier-1--without_credit_history.pickle"
+)
 
 model_version__with_history = "1.0"
-pipeline_with_history = joblib.load("./models/classifier-2--with_credit_history.pickle")
+pipeline_with_history = joblib.load(
+    "./models/classifier-2--with_credit_history.pickle"
+)
 
 app = Flask(__name__)
 
@@ -33,7 +37,7 @@ def hello():
         "index.html",
         Service=service,
         Revision=revision,
-        model_1_version=model_version__basic_info,   
+        model_1_version=model_version__basic_info,
         model_2_version=model_version__with_history,
     )
 
@@ -46,7 +50,7 @@ def test_server():
 
 
 # To get the model's predictions
-@app.route("/api/predict-basic", methods=["POST"])
+@app.route("/api/predict", methods=["POST"])
 def predict_loan_status():
     """API endpoint to make predictions based on info from application (basic)."""
     try:
@@ -62,9 +66,9 @@ def predict_loan_status():
 
         # Return the results as JSON
         return jsonify({
-            "model": "Prediction based on info from the application only.",
+            "model": "Credit default prediction (no credit history is needed)",
             "model_version": model_version__basic_info,
-            "model_output_options": "1: will default, 0: no difficulties",
+            "model_output_options": "1: financial difficulties, 0: no financial difficulties",
             "prediction": prediction.tolist(),
             "probability": probability.tolist(),
         })
@@ -72,7 +76,7 @@ def predict_loan_status():
         return jsonify({"error": str(e)})
 
 
-@app.route("/api/predict-with-history", methods=["POST"])
+@app.route("/api/predict-with-credit-history", methods=["POST"])
 def predict_grade():
     """API endpoint to make predictions based on info from application and credit history."""
     try:
@@ -82,18 +86,17 @@ def predict_grade():
 
         # Perform predictions using the pipeline (model)
         prediction = pipeline_with_history.predict(df)
-        
+
         # Probability to default
-        probability = pipeline_basic_info.predict_proba(df)[:, 1]
-        
+        probability = pipeline_with_history.predict_proba(df)[:, 1]
+
         # Return the results as JSON
         return jsonify({
-            "model": "Prediction based on info from the application and credit history.",
+            "model": "Credit default prediction (credit history is needed)",
             "model_version": model_version__with_history,
-            "model_output_options": "1: will default, 0: no difficulties",
+            "model_output_options": "1: financial difficulties, 0: no financial difficulties",
             "prediction": prediction.tolist(),
             "probability": probability.tolist(),
-
         })
     except Exception as e:
         return jsonify({"error": str(e)})

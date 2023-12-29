@@ -21,14 +21,14 @@ You should **study the report** available **via this link:**
 
 ## Annotation
 
-In this project, a comprehensive analysis of **Home Credit Group** credit data was conducted. Two models (one that does not require data about credit history and the one that does) that predict whether a loan applicant will repay the loan were developed, rigorously tested, and successfully deployed on the cloud and are accessible via API. The results show that historical credit data only slightly improves the model's performance.
+In this project, an extensive analysis of credit data from **Home Credit Group** was undertaken. Two distinct models were developed to predict if a loan applicant repays the loan or faces financial difficulties: one model operates independently of credit history data and another one incorporates such information. After rigorous testing, the models were successfully deployed on the Google Cloud Platform and now are available via API. Surprisingly, the results indicate only marginal improvement in model performance when historical credit data is included.
 
 ## Contents of This Directory
 
 Main:
 
-- `341.ipynb`  
-File with project description.
+- `341.ipynb`: 
+File with project description *(might not be present on GitHub)*.
 
 - `index.html`:
 Rendered report of the analysis **(the main file of this project)**.  
@@ -55,13 +55,16 @@ Directory for images and pictures.
 Directories *(might not be present on GitHub)*:
 
 - `data`:
-Directory for data *(not present on GitHub)*. It has subdirectories:
+Directory for data. It has subdirectories:
     - `info`:
-    Directory for metadata and description.
+    Directory for metadata and descriptions.
     - `raw`:
     Directory for raw data *(not present on GitHub)*.
     - `interim`:
     Directory for interim data and cached data analysis results *(not present on GitHub)*.
+
+- `models`:
+  Directory for models *(not present on GitHub)*.
 
 
 Files:
@@ -74,6 +77,7 @@ File with a list of Python packages required for this project.
 Created using `pip freeze > requirements.txt`.
 
 ## Reproducibility
+
 ### Working Directory
 
 During the installation and analysis, the working directory of all tools must
@@ -109,4 +113,4 @@ Additional instructions for reproducing the analysis are provided in the report.
 
 ## Model Deployment
 
-To deploy the models, a Flask application was created. The code needed to deploy the application is available in the sub-directory `app`. More details are available in the README file of that sub-directory.
+To deploy the models, a Flask application was created. The code needed to deploy the application is available in the sub-directory `app` and more details are available in the README file of that sub-directory.

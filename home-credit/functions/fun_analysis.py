@@ -1259,9 +1259,11 @@ class CrossTab:
         self.chi_square_omnibus = rez
 
         if output == "full":
-            out = f"chi-square test, χ²({rez.dof}, "
-            f"n = {self.counts.sum().sum()}) = {round(rez.statistic, 2)}, "
-            f"{my.format_p(rez.pvalue)}"
+            out = str(
+                f"chi-square test, χ²({rez.dof}, "
+                f"n = {self.counts.sum().sum()}) = {round(rez.statistic, 2)}, "
+                f"{my.format_p(rez.pvalue)}"
+            )
         elif output == "short":
             out = f"chi-square test, {my.format_p(rez.pvalue)}"
         else:

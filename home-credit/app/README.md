@@ -30,7 +30,7 @@ Response:
 OK - server is up and running!
 ```
 
-- **Predict home credit default (no credit history data required):**
+- **Predict home credit default (no credit history data is required):**
 
 ```bash
 curl https://home-credit-default-prediction-sarhiiybua-ew.a.run.app/api/predict --ssl-no-revoke \
@@ -38,16 +38,30 @@ curl https://home-credit-default-prediction-sarhiiybua-ew.a.run.app/api/predict 
      -d @test-data/data-without-credit-history.json
 ```
 
-This mode needs pre-processed data with at least the variables that are present
-in `test-data/data-without-credit-history.json` file.
-
 Response:
 
 ```json
-
+{
+  "model": "Credit default prediction (no credit history is needed)",
+  "model_output_options": "1: financial difficulties, 0: no financial difficulties",
+  "model_version": "1.0",
+  "prediction": [
+    0,
+    0
+  ],
+  "probability": [
+    0.4116794310847024,
+    0.3414021721487845
+  ]
+}
 ```
 
-- **Predict home credit default (no credit history data required):**
+**Note:** this model needs pre-processed data with the exact variables that 
+are present in `test-data/data-without-credit-history.json` file.
+
+
+
+- **Predict home credit default (credit history data is required):**
 
 ```bash
 curl https://home-credit-default-prediction-sarhiiybua-ew.a.run.app/api/predict-with-credit-history --ssl-no-revoke \
@@ -55,14 +69,26 @@ curl https://home-credit-default-prediction-sarhiiybua-ew.a.run.app/api/predict-
      -d @test-data/data-with-credit-history.json
 ```
 
-This mode needs pre-processed data with at least the variables that are present
-in `test-data/data-with-credit-history.json` file.
-
 Response:
 
 ```json
-
+{
+  "model": "Credit default prediction (credit history is needed)",
+  "model_output_options": "1: financial difficulties, 0: no financial difficulties",
+  "model_version": "1.0",
+  "prediction": [
+    0,
+    0
+  ],
+  "probability": [
+    0.37757032172077054,
+    0.2063442279400693
+  ]
+}
 ```
+
+**Note:** this model needs pre-processed data with exact variables that 
+are present in `test-data/data-with-credit-history.json` file.
 
 
 
