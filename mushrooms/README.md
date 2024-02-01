@@ -89,12 +89,13 @@ conda activate proj-mushrooms
 pip install -r requirements.txt
 ```
 
-To install `pythorch` with CUDA support, run the following command in the terminal:
+To install `pythorch` with CUDA (v12.1 or higher) support, run the following command in the terminal:
 ```bash
-pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121
+pip install "torch==2.1.2+cu121"  "torchvision==0.16.2+cu121" \
+  --index-url https://download.pytorch.org/whl/cu121
 ```
 
-More details on installing `pythorch` with CUDA support can be found [here](https://pytorch.org/get-started/locally/).
+If you need other CUDA version support, please, find more details at the PyTorch installation [website](https://pytorch.org/get-started/locally/).
 
 ### HTML Report
 
