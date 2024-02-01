@@ -30,31 +30,37 @@ Data analysis:
     [HTML report](https://gegznav.github.io/ds-projects/european-football) 
     - Highlights: exploratory data analysis, inferential statistics, and predictive modeling
     
-5. **Travel Insurance Claim Prediction** (data analysis/machine learning project)
+5. **Travel Insurance Claim Prediction** (machine learning project)
     - Main tools: Python | 
     [Repository](https://github.com/GegznaV/ds-projects/tree/main/travel-insurance) | 
     [HTML report](https://gegznav.github.io/ds-projects/travel-insurance) 
     - Highlights: machine learning (classification, hyperparameter tuning, model selection)
     
-6. **Stroke Risk Prediction** (data analysis/machine learning project)
+6. **Stroke Risk Prediction** (machine learning project)
     - Main tools: Python | 
     [Repository](https://github.com/GegznaV/ds-projects/tree/main/stroke-prediction) | 
     [HTML report](https://gegznav.github.io/ds-projects/stroke-prediction) 
-    - Highlights: machine learning (classification, hyperparameter tuning, model selection, model deployment on Render.com)
+    - Highlights: machine learning (classification, hyperparameter tuning, model selection, and deployment on Render.com)
 
-7. **Lending Club Loan Data Analysis** (data analysis/machine learning project)
+7. **Lending Club Loan Data Analysis** (machine learning project)
     - Main tools: Python | 
     [Repository](https://github.com/GegznaV/ds-projects/tree/main/lending-club) | 
     [HTML report](https://gegznav.github.io/ds-projects/lending-club) | 
     [Flask app](https://github.com/GegznaV/ds-projects/tree/main/lending-club/app)
-    - Highlights: machine learning (classification, regression, model selection, model deployment on Google Cloud Platform)
+    - Highlights: machine learning (classification and regression, model selection and deployment on Google Cloud Platform, GCP)
 
-8. **Home Credit Default Risk Prediction** (data analysis/machine learning project)
+8. **Home Credit Default Risk Prediction** (machine learning project)
     - Main tools: Python | 
     [Repository](https://github.com/GegznaV/ds-projects/tree/main/home-credit) | 
     [HTML report](https://gegznav.github.io/ds-projects/home-credit) | 
     [Flask app](https://github.com/GegznaV/ds-projects/tree/main/home-credit/app)
-    - Highlights: machine learning (classification, model selection, model deployment on Google Cloud Platform, SHAP values/explainability)
+    - Highlights: machine learning (classification, model selection, explainability and deployment on GCP)
+
+8. **Mushrooms Classification: Common Genus's Images** (deep learning project)
+    - Main tools: Python | 
+    [Repository](https://github.com/GegznaV/ds-projects/tree/main/mushrooms) | 
+    [HTML report](https://gegznav.github.io/ds-projects/mushrooms) 
+    - Highlights: deep learning (classification, computer vision)
 
 
 Software engineering:
