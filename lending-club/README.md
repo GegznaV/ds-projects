@@ -72,9 +72,9 @@ Files:
 - `.gitignore`:
 Utility file for Git.
 
-- `requirements.txt`: 
+- `requirements.txt`:
 File with a list of Python packages required for this project.
-Created using `pip freeze > requirements.txt`.
+Created using the tool [`pigar`](https://github.com/damnever/pigar) and manually corrected afterwards.
 
 ## Reproducibility
 ### Working Directory
