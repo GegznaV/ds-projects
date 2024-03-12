@@ -1,0 +1,19 @@
+class_weights: !!python/object/apply:torch._utils._rebuild_tensor_v2
+- !!python/object/apply:torch.storage._load_from_bytes
+  - !!binary |
+    gAKKCmz8nEb5IGqoUBkugAJN6QMugAJ9cQAoWBAAAABwcm90b2NvbF92ZXJzaW9ucQFN6QNYDQAA
+    AGxpdHRsZV9lbmRpYW5xAohYCgAAAHR5cGVfc2l6ZXNxA31xBChYBQAAAHNob3J0cQVLAlgDAAAA
+    aW50cQZLBFgEAAAAbG9uZ3EHSwR1dS6AAihYBwAAAHN0b3JhZ2VxAGN0b3JjaApEb3VibGVTdG9y
+    YWdlCnEBWA4AAAA5ODk0MTU2Nzg1NTEzNnECWAMAAABjcHVxA0sHTnRxBFEugAJdcQBYDgAAADk4
+    OTQxNTY3ODU1MTM2cQFhLgcAAAAAAAAAAAAAAAAA8D/If89p3b4iQMHwLDjGd1ZA9la4+2b3MECr
+    qqqqKqpyQIxha1EcMzJA3N9OomiHWUA=
+- 0
+- !!python/tuple
+  - 7
+- !!python/tuple
+  - 1
+- false
+- !!python/object/apply:collections.OrderedDict
+  - []
+learning_rate: 5.0e-05
+num_classes: 7
