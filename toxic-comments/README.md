@@ -1,4 +1,4 @@
-# Mushrooms Classification: Common Genus's Images
+# Classification of Toxic Comments
 
 <table width="100%">
   <tr>
@@ -13,7 +13,7 @@
   
   This directory contains a **deep learning project** by [Vilmantas Gėgžna](https://github.com/GegznaV).  
 You should **study the report** available **via this link:**  
-<https://gegznav.github.io/ds-projects/mushrooms>   
+<https://gegznav.github.io/ds-projects/toxic-comments>   
 
   </td>
   </tr>
@@ -21,20 +21,20 @@ You should **study the report** available **via this link:**
 
 ## Annotation
 
-This project addresses the significant **issue of mushroom poisoning**, with 7,500 annual cases reported in the United States, primarily due to misidentification. The initiative focuses on developing a **deep learning-based model for mushroom classification**, employing advanced techniques such as computer vision and transfer learning. Utilizing tools like **Python**, **PyTorch**, **Lightning**, and **TensorBoard**, the project meticulously executes a plan to create four models based on the ***ResNet-18*** architecture, pre-trained on ***ImageNet***. The best-performing model achieves a commendable **balanced accuracy** score of **82.1%** on the test set and an efficient **prediction speed** of **18 milliseconds per image**, showcasing its practicality **for real-time applications**. A genus-specific analysis identifies *Suillus*, *Amanita*, and *Boletus* as among the most reliably predicted genera. However, the revelation that 10.8% of predictions for the typically edible *Agaricus* turn out to be the poisonous *Amanita* raises concerns and underscores the need for further model improvements. Further investigation highlights the potential benefits of image standardization, prompting considerations for refining data acquisition strategies and increasing sample size in problematic subgroups to optimize the model's predictive capabilities.
+In response to the challenges posed by online abuse and harassment hindering open discourse, a data science project was undertaken to develop an effective moderation system. The project utilized a **DistillBERT**-based model for **multi-label text classification**, leveraging transfer learning techniques for **deep learning**. Built using **PyTorch and Lightning** frameworks, the model was trained on a dataset comprising **223,549 comments**, encompassing both clean (non-toxic) and various forms of toxic content (toxic, severe toxic, obscene, threat, insult, identity hate). Rigorous state-of-the-art procedures were employed to ensure robustness and accuracy. The model achieved a balanced **accuracy** of **0.964** and an **F1 score** of **0.551** on the test set, demonstrating its efficacy in identifying and moderating potentially harmful comments. This project aims to contribute to the creation of safer and more inclusive online communities by facilitating constructive conversations while mitigating the impact of abusive behavior.
 
 ## Contents of This Directory
 
 Main:
 
-- `415.ipynb`: 
+- `425.ipynb`: 
 File with project description *(might not be present on GitHub)*.
 
 - `index.html`:
 Rendered report of the analysis **(the main file of this project)**.  
 View it via the link provided above.
 
-- `mushrooms.ipynb`:
+- `toxic-comments.ipynb`:
 Source code of the data analysis (Jupyter Notebook).
 
 
@@ -48,13 +48,13 @@ Directories *(might not be present on GitHub)*:
 
 - `data`:
 Directory for data. It has subdirectories:
-    - `raw_ok`:
-    Directory for raw data without errors and irrelevant images *(not present on GitHub)*.
-    - `resized_256`:
-    Directory for resized images *(not present on GitHub)*.
+    - `raw`:
+    Directory for the raw data.
+    - `processed`:
+    Directory for pre-processed data and analysis results.
 
 - `logs`:
-  Directory for logs, profiling data and checkpoints *(not present on GitHub)*.
+  Directory for logs and checkpoints.
 
 
 Files:
@@ -63,8 +63,8 @@ Files:
 Utility file for Git.
 
 - `requirements.txt`: 
-File with a list of Python packages required for this project.
-Created using the tool [`pigar`](https://github.com/damnever/pigar) and manually corrected afterwards.
+File with a list of Python packages required for this project on a Windows-based environment.
+Created using the tool [`pigar`](https://github.com/damnever/pigar) and manually corrected afterwards. *NOTE:* package versions used in Colab might differ.
 
 ## Reproducibility
 
@@ -72,19 +72,19 @@ Created using the tool [`pigar`](https://github.com/damnever/pigar) and manually
 
 During the installation and analysis, the working directory of all tools must
  be the root directory of this project 
-(i.e., the directory containing the `mushrooms.ipynb` file).
+(i.e., the directory containing the `toxic-comments.ipynb` file).
 
 ### Tools
 
-This project uses Python 3.11 as the main data analysis tool.
+This project uses Python 3.11 in a Windows-based environment (local) and 3.10 in Colab.
 
 To run the analysis, it is recommended to create a separate virtual environment 
-(e.g., `proj-mushrooms`) and install the required Python packages there.
+(e.g., `proj-toxic-comments`) and install the required Python packages there.
 Assuming that [Anaconda](https://www.anaconda.com/download) is installed, this can be accomplished by running the following commands in the terminal:
 
 ```bash
-conda create -n proj-mushrooms python=3.11
-conda activate proj-mushrooms
+conda create -n proj-toxic-comments python=3.11
+conda activate proj-toxic-comments
 pip install -r requirements.txt
 ```
 
@@ -101,5 +101,5 @@ If you require support for different CUDA versions, please refer to the PyTorch 
 To create an HTML report, install [Quarto](https://quarto.org/docs/download/) (version 1.4 or newer is recommended) and run the following command in the terminal:
 
 ```bash
-quarto render mushrooms.ipynb --to html --output index.html
+quarto render toxic-comments.ipynb --to html --output index.html
 ```
