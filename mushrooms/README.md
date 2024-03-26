@@ -64,7 +64,7 @@ Utility file for Git.
 
 - `requirements.txt`: 
 File with a list of Python packages required for this project.
-Created using the tool [`pigar`](https://github.com/damnever/pigar).
+Created using the tool [`pigar`](https://github.com/damnever/pigar) and manually corrected afterwards.
 
 ## Reproducibility
 
@@ -94,7 +94,7 @@ pip install "torch==2.1.2+cu121"  "torchvision==0.16.2+cu121" \
   --index-url https://download.pytorch.org/whl/cu121
 ```
 
-If you need other CUDA version support, please, find more details at the PyTorch installation [website](https://pytorch.org/get-started/locally/).
+If you require support for different CUDA versions, please refer to the PyTorch installation [website](https://pytorch.org/get-started/locally/) for more details.
 
 ### HTML Report
 
