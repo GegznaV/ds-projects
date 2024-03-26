@@ -72,3 +72,18 @@ The list of sample data analysis, machine learning, and software engineering-rel
     
 3. **`RcmdrPlugin.biostat`: Plug-in for R Commander** (R package):
     - R, GUI programming (via R's Tcl/Tk interface) \| [Repository](https://github.com/GegznaV/RcmdrPlugin.biostat)
+
+
+## Let's Connect
+
+<center>
+<a href="https://github.com/GegznaV" target="_blank">
+   <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=lightgrey&color=black">
+</a>
+<a href="https://www.linkedin.com/in/vilmantas-gegzna/" target="_blank">
+   <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=0e76a8&color=black">
+</a>
+<a href="mailto:gegznav@gmail.com?subject=Let's connect (DS portfolio)" target="_blank">
+   <img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&color=black">
+</a>
+</center>
