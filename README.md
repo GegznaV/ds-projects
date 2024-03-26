@@ -1,7 +1,6 @@
 Data Science and Software Engineering Projects
 ================================================
 
-The list of sample data analysis, machine learning, deep learning, and software engineering-related projects created by **Vilmantas Gėgžna**.
 
 <img src="https://raw.githubusercontent.com/GegznaV/ds-projects/main/_img/vg-profile-100x100.png" alt="profile photo" width="100" height="100"
 style="
@@ -12,7 +11,6 @@ border-radius: 50%;
   margin-left: auto;
   margin-right: auto;
 "/>
-
 
 <center>
 <a href="https://github.com/GegznaV" target="_blank">
@@ -25,6 +23,9 @@ border-radius: 50%;
    <img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&color=black">
 </a>
 </center>
+
+The list of sample data analysis, machine learning, deep learning, and software engineering-related projects created by **Vilmantas Gėgžna**.
+
 
 ## Data Science Projects
 
