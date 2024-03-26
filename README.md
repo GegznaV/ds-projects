@@ -3,7 +3,7 @@ Data Science and Software Engineering Projects
 
 The list of sample data analysis, machine learning, deep learning, and software engineering-related projects created by **Vilmantas Gėgžna**.
 
-<img src="_img/vg-profile-100x100.png" 
+<img src="https://raw.githubusercontent.com/GegznaV/ds-projects/main/_img/vg-profile-100x100.png" alt="profile photo" width="100" height="100"
 style="
 border-radius: 50%;
   display: block;
