@@ -6,14 +6,14 @@ The list of sample data analysis, machine learning, deep learning, and software 
 <style>
 .round-image {
   border-radius: 50%;
-}
+};
 .center {
   display: block;
   margin-top: 20px;
   margin-bottom: 20px;
   margin-left: auto;
   margin-right: auto;
-}
+};
 </style>
 
 <img class="center round-image" src="_img/vg-profile-100x100.png" />
