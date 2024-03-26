@@ -3,8 +3,19 @@ Data Science and Software Engineering Projects
 
 The list of sample data analysis, machine learning, and software engineering-related projects created by **Vilmantas Gėgžna**.
 
+<center>
+<a href="https://github.com/GegznaV" target="_blank">
+   <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=lightgrey&color=black">
+</a>
+<a href="https://www.linkedin.com/in/vilmantas-gegzna/" target="_blank">
+   <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=0e76a8&color=black">
+</a>
+<a href="mailto:gegznav@gmail.com?subject=Let's connect (DS portfolio)" target="_blank">
+   <img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&color=black">
+</a>
+</center>
 
-## Data science projects
+## Data Science Projects
 
 1. **Mental Health in Tech Industry** (data analysis project)
     - Main tools: Python, SQL | 
@@ -62,7 +73,8 @@ The list of sample data analysis, machine learning, and software engineering-rel
     [HTML report](https://gegznav.github.io/ds-projects/mushrooms) 
     - Highlights: deep learning (classification, computer vision)
 
-## Software engineering projects:
+
+## Software Engineering Projects
 
 1. **Simple Calculator in Python** (Python package: example) :
     - Python, CI/CD on GitHub Actions, Unit testing, Docker \| [Repository](https://github.com/GegznaV/calculator-py)
@@ -72,18 +84,3 @@ The list of sample data analysis, machine learning, and software engineering-rel
     
 3. **`RcmdrPlugin.biostat`: Plug-in for R Commander** (R package):
     - R, GUI programming (via R's Tcl/Tk interface) \| [Repository](https://github.com/GegznaV/RcmdrPlugin.biostat)
-
-
-## Let's Connect
-
-<center>
-<a href="https://github.com/GegznaV" target="_blank">
-   <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=lightgrey&color=black">
-</a>
-<a href="https://www.linkedin.com/in/vilmantas-gegzna/" target="_blank">
-   <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=0e76a8&color=black">
-</a>
-<a href="mailto:gegznav@gmail.com?subject=Let's connect (DS portfolio)" target="_blank">
-   <img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&color=black">
-</a>
-</center>
