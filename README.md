@@ -73,6 +73,11 @@ The list of sample data analysis, machine learning, deep learning, and software 
     [HTML report](https://gegznav.github.io/ds-projects/mushrooms) 
     - Highlights: computer vision, multi-class classification, transfer learning
 
+10. **Classification of Toxic Comments** (deep learning project)
+    - Main tools: Python | 
+    [Repository](https://github.com/GegznaV/ds-projects/tree/main/toxic-comments) | 
+    [HTML report](https://gegznav.github.io/ds-projects/toxic-comments) 
+    - Highlights: natural language processing (NLP), multi-label classification, transfer learning
 
 ## Software Engineering Projects
 
