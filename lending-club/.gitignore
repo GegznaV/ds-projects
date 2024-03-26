@@ -232,7 +232,7 @@ data/interim/*
 data/raw/*
 *--*.ipynb
 setup-quick.sh
-img/
+
 
 !index.html
 !app/**
