@@ -24,7 +24,7 @@ border-radius: 50%;
 </a>
 </center>
 
-The list of sample data analysis, machine learning, deep learning, and software engineering-related projects created by **Vilmantas Gėgžna**.
+The list showcases sample projects related to data analysis, machine learning, deep learning, and software engineering created by **Vilmantas Gėgžna**.
 
 
 ## Data Science Projects
