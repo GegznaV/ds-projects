@@ -1,10 +1,10 @@
-Data Analysis and Software Engineering Projects
+Data Science and Software Engineering Projects
 ================================================
 
 The list of sample data analysis, machine learning, and software engineering-related projects created by **Vilmantas Gėgžna**.
 
 
-Data analysis:
+## Data science projects
 
 1. **Mental Health in Tech Industry** (data analysis project)
     - Main tools: Python, SQL | 
@@ -62,14 +62,13 @@ Data analysis:
     [HTML report](https://gegznav.github.io/ds-projects/mushrooms) 
     - Highlights: deep learning (classification, computer vision)
 
+## Software engineering projects:
 
-Software engineering:
-
-1. **Simple Calculator in Python** (Python package) :
+1. **Simple Calculator in Python** (Python package: example) :
     - Python, CI/CD on GitHub Actions, Unit testing, Docker \| [Repository](https://github.com/GegznaV/calculator-py)
 
-2. **`addins.rmd`: A Set of RStudio add-ins** (R package):
+2. **`addins.rmd`: A Set of RStudio Add-ins** (R package):
     - R, CI/CD on GitHub Actions \| [Repository](https://github.com/GegznaV/addins.rmd)
     
-3. **`RcmdrPlugin.biostat`: plug-in for R Commander** (R package):
+3. **`RcmdrPlugin.biostat`: Plug-in for R Commander** (R package):
     - R, GUI programming (via R's Tcl/Tk interface) \| [Repository](https://github.com/GegznaV/RcmdrPlugin.biostat)
