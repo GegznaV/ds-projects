@@ -11,7 +11,7 @@
   </td> 
   <td width="80%" align="center">
   
-  This directory contains a **data analysis project** by [Vilmantas Gėgžna](https://github.com/GegznaV).  
+  This directory contains a **machine learning project** by [Vilmantas Gėgžna](https://github.com/GegznaV).  
 You should **study the report** available **via this link:**  
 <https://gegznav.github.io/ds-projects/lending-club>   
 
@@ -34,8 +34,6 @@ While the models have been successfully deployed and are currently accessible th
 
 Main:
 
-- `335.ipynb`  
-File with project description.
 
 - `index.html`:
 Rendered report of the analysis **(the main file of this project)**.  
