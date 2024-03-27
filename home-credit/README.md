@@ -11,7 +11,7 @@
   </td> 
   <td width="80%" align="center">
   
-  This directory contains a **data analysis project** by [Vilmantas Gėgžna](https://github.com/GegznaV).  
+  This directory contains a **machine learning project** by [Vilmantas Gėgžna](https://github.com/GegznaV).  
 You should **study the report** available **via this link:**  
 <https://gegznav.github.io/ds-projects/home-credit>   
 
@@ -27,8 +27,6 @@ In this project, an extensive analysis of credit data from **Home Credit Group**
 
 Main:
 
-- `341.ipynb`: 
-File with project description *(might not be present on GitHub)*.
 
 - `index.html`:
 Rendered report of the analysis **(the main file of this project)**.  
