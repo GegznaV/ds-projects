@@ -11,7 +11,7 @@
   </td> 
   <td width="80%" align="center">
   
-  This directory contains a **data analysis project** by [Vilmantas Gėgžna](https://github.com/GegznaV).  
+  This directory contains a **machine learning project** by [Vilmantas Gėgžna](https://github.com/GegznaV).  
 You should **study the report** available **via this link:**  
 <https://gegznav.github.io/ds-projects/stroke-prediction>   
 
@@ -35,8 +35,6 @@ According to the World Health Organization (WHO), **stroke** stands as the **lea
 
 Main:
 
-- `325.ipynb`  
-File with project description.
 
 - `index.html`:
 Rendered report of the analysis **(the main file of this project)**.  
