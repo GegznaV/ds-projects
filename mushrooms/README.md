@@ -27,8 +27,6 @@ This project addresses the significant **issue of mushroom poisoning**, with 7,5
 
 Main:
 
-- `415.ipynb`: 
-File with project description *(might not be present on GitHub)*.
 
 - `index.html`:
 Rendered report of the analysis **(the main file of this project)**.  
