@@ -27,9 +27,6 @@ In response to the challenges posed by online abuse and harassment hindering ope
 
 Main:
 
-- `425.ipynb`: 
-File with project description *(might not be present on GitHub)*.
-
 - `index.html`:
 Rendered report of the analysis **(the main file of this project)**.  
 View it via the link provided above.
