@@ -62,7 +62,8 @@ The list showcases sample projects related to data analysis, machine learning, d
 6. **Stroke Risk Prediction** (machine learning project 💡)
     - Main tools: Python | 
     [Repository](https://github.com/GegznaV/ds-projects/tree/main/stroke-prediction) | 
-    [HTML report](https://gegznav.github.io/ds-projects/stroke-prediction) 
+    [HTML report](https://gegznav.github.io/ds-projects/stroke-prediction) | 
+    [Flask app](https://github.com/GegznaV/deploy-stroke-prediction)
     - Highlights: classification, hyperparameter tuning, model selection, and deployment on Render.com
 
 7. **Lending Club Loan Data Analysis** (machine learning project 💡)
