@@ -29,68 +29,76 @@ The list showcases sample projects related to data analysis, machine learning, d
 
 ## Data Science Projects
 
-1. **Mental Health in Tech Industry** (data analysis project 📈)
-    - Main tools: Python, SQL | 
-    [Repository](https://github.com/GegznaV/ds-projects/tree/main/mental-health) | 
-    [HTML report](https://gegznav.github.io/ds-projects/mental-health/)
-    - Highlights: categorical data analysis
 
-2. **The Analysis of *Apple Podcasts* Reviews** (data analysis project 📈)
-    - Main tools: Python,  R | 
-    [Repository](https://github.com/GegznaV/ds-projects/tree/main/apple-podcasts) | 
-    [HTML report](https://gegznav.github.io/ds-projects/apple-podcasts/)
-    - Highlights: inferential statistics
-
-3. **Red Wine Quality Prediction** (data analysis project 📈)
-    - Main tools: R, Python | 
-    [Repository](https://github.com/GegznaV/ds-projects/tree/main/red-wine-quality) | 
-    [HTML report](https://gegznav.github.io/ds-projects/red-wine-quality/)
-    - Highlights: linear and logistic regression, exploratory PCA (principal component analysis)
-
-4. **The Insights on European Football** (data analysis project 📈)
-    - Main tools: Python, SQL | 
-    [Repository](https://github.com/GegznaV/ds-projects/tree/main/european-football) | 
-    [HTML report](https://gegznav.github.io/ds-projects/european-football) 
-    - Highlights: exploratory data analysis (EDA), inferential statistics, and predictive modeling
-    
-5. **Travel Insurance Claim Prediction** (machine learning project 💡)
+1. **Age and Gender Prediction from Images** (deep learning project 🧩)
     - Main tools: Python | 
-    [Repository](https://github.com/GegznaV/ds-projects/tree/main/travel-insurance) | 
-    [HTML report](https://gegznav.github.io/ds-projects/travel-insurance) 
-    - Highlights: classification, hyperparameter tuning, model selection
-    
-6. **Stroke Risk Prediction** (machine learning project 💡)
-    - Main tools: Python | 
-    [Repository](https://github.com/GegznaV/ds-projects/tree/main/stroke-prediction) | 
-    [HTML report](https://gegznav.github.io/ds-projects/stroke-prediction) | 
-    [Flask app](https://github.com/GegznaV/deploy-stroke-prediction)
-    - Highlights: classification, hyperparameter tuning, model selection, and deployment on Render.com
+    [Repository](https://github.com/GegznaV/ds-projects/tree/main/age-gender-images) | 
+    [HTML report](https://gegznav.github.io/ds-projects/age-gender-images) 
+    - Highlights: computer vision, multi-task learning (classification + regression), custom loss function
 
-7. **Lending Club Loan Data Analysis** (machine learning project 💡)
+2.  **Classification of Toxic Comments** (deep learning project 🧩)
+    - Main tools: Python | 
+    [Repository](https://github.com/GegznaV/ds-projects/tree/main/toxic-comments) | 
+    [HTML report](https://gegznav.github.io/ds-projects/toxic-comments) 
+    - Highlights: natural language processing (NLP), multi-label classification, transfer learning, Hugging face
+
+3. **Mushrooms Classification: Common Genus's Images** (deep learning project 🧩)
+    - Main tools: Python | 
+    [Repository](https://github.com/GegznaV/ds-projects/tree/main/mushrooms) | 
+    [HTML report](https://gegznav.github.io/ds-projects/mushrooms) 
+    - Highlights: computer vision, multi-class classification, transfer learning
+
+4.  **Lending Club Loan Data Analysis** (machine learning project 💡)
     - Main tools: Python | 
     [Repository](https://github.com/GegznaV/ds-projects/tree/main/lending-club) | 
     [HTML report](https://gegznav.github.io/ds-projects/lending-club) | 
     [Flask app](https://github.com/GegznaV/ds-projects/tree/main/lending-club/app)
     - Highlights: classification and regression, model selection and deployment on Google Cloud Platform (GCP)
 
-8. **Home Credit Default Risk Prediction** (machine learning project 💡)
+5.  **Home Credit Default Risk Prediction** (machine learning project 💡)
     - Main tools: Python | 
     [Repository](https://github.com/GegznaV/ds-projects/tree/main/home-credit) | 
     [HTML report](https://gegznav.github.io/ds-projects/home-credit) | 
     [Flask app](https://github.com/GegznaV/ds-projects/tree/main/home-credit/app)
     - Highlights: classification, model selection, explainability and deployment on GCP
 
-9. **Mushrooms Classification: Common Genus's Images** (deep learning project 🧩)
+6.  **Stroke Risk Prediction** (machine learning project 💡)
     - Main tools: Python | 
-    [Repository](https://github.com/GegznaV/ds-projects/tree/main/mushrooms) | 
-    [HTML report](https://gegznav.github.io/ds-projects/mushrooms) 
-    - Highlights: computer vision, multi-class classification, transfer learning
+    [Repository](https://github.com/GegznaV/ds-projects/tree/main/stroke-prediction) | 
+    [HTML report](https://gegznav.github.io/ds-projects/stroke-prediction) | 
+    [Flask app](https://github.com/GegznaV/deploy-stroke-prediction)
+    - Highlights: classification, hyperparameter tuning, model selection, and deployment on Render.com
 
-10. **Classification of Toxic Comments** (deep learning project 🧩)
+7.  **Travel Insurance Claim Prediction** (machine learning project 💡)
     - Main tools: Python | 
-    [Repository](https://github.com/GegznaV/ds-projects/tree/main/toxic-comments) | 
-    [HTML report](https://gegznav.github.io/ds-projects/toxic-comments) 
-    - Highlights: natural language processing (NLP), multi-label classification, transfer learning
+    [Repository](https://github.com/GegznaV/ds-projects/tree/main/travel-insurance) | 
+    [HTML report](https://gegznav.github.io/ds-projects/travel-insurance) 
+    - Highlights: classification, hyperparameter tuning, model selection
+
+8.  **The Insights on European Football** (data analysis project 📈)
+    - Main tools: Python, SQL | 
+    [Repository](https://github.com/GegznaV/ds-projects/tree/main/european-football) | 
+    [HTML report](https://gegznav.github.io/ds-projects/european-football) 
+    - Highlights: exploratory data analysis (EDA), inferential statistics, and predictive modeling
+
+9.  **Red Wine Quality Prediction** (data analysis project 📈)
+    - Main tools: R, Python | 
+    [Repository](https://github.com/GegznaV/ds-projects/tree/main/red-wine-quality) | 
+    [HTML report](https://gegznav.github.io/ds-projects/red-wine-quality/)
+    - Highlights: linear and logistic regression, exploratory PCA (principal component analysis)
+
+10. **The Analysis of *Apple Podcasts* Reviews** (data analysis project 📈)
+    - Main tools: Python,  R | 
+    [Repository](https://github.com/GegznaV/ds-projects/tree/main/apple-podcasts) | 
+    [HTML report](https://gegznav.github.io/ds-projects/apple-podcasts/)
+    - Highlights: inferential statistics
+
+11. **Mental Health in Tech Industry** (data analysis project 📈)
+    - Main tools: Python, SQL | 
+    [Repository](https://github.com/GegznaV/ds-projects/tree/main/mental-health) | 
+    [HTML report](https://gegznav.github.io/ds-projects/mental-health/)
+    - Highlights: categorical data analysis
+
 
 ## Software Engineering Projects
 
